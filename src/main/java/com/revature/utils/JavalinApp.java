@@ -7,14 +7,16 @@ import java.util.Scanner;
 public class JavalinApp {
 
     LoggingUtil logger = new LoggingUtil();
-
+/*
     private Javalin app = Javalin.create().routes(() -> {
 
         //require a valid token for all account and customer activities
     });
+*/
 
-    public void start(int port) {
-        app.start(port);
+    public static void main(String[] args) {
+
+        Javalin app = Javalin.create().start(8080);
 
         //Javalin runs until "close" is typed into the console
         Scanner scan = new Scanner(System.in);
