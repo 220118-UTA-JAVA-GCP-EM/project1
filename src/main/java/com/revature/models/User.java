@@ -7,7 +7,28 @@ public class User {
     private String fname;
     private String lname;
     private String email;
-    private int roleId;
+    private UserRole roleId;
+
+    public User(){
+
+    }
+    public User(String username,String password,String fname,String lname,String email, UserRole roleId){
+        this.username = username;
+        this.password = password;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.roleId = roleId;
+    }
+    public User(String username,String password,String fname,String lname,String email, UserRole roleId, int id){
+        this.username = username;
+        this.password = password;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.roleId = roleId;
+        this.id = id;
+    }
 
     public int getId() {
         return id;
@@ -57,11 +78,19 @@ public class User {
         this.email = email;
     }
 
-    public int getRoleId() {
+    public UserRole getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(UserRole roleId) {
         this.roleId = roleId;
+    }
+
+
+    public String toString(){
+        return "ID#" + this.id + " " +
+                "Full Name: " + this.fname + " " + this.lname + "\n" +
+                "E-mail: " + this.email + "\n" +
+                "Password: " + this.password + "\n";
     }
 }
