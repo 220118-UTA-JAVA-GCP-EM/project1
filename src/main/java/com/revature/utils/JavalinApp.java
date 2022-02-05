@@ -1,12 +1,16 @@
 package com.revature.utils;
 
+import com.revature.daos.ReimbursementDao;
+import com.revature.daos.ReimbursementDaoImp;
 import com.revature.daos.UserDao;
 import com.revature.daos.UserDaoImp;
+import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.models.UserRole;
 import io.javalin.Javalin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,6 +32,7 @@ public class JavalinApp {
         Javalin app = Javalin.create().start(8080);
 
         UserDao test = new UserDaoImp();
+        ReimbursementDao test2 = new ReimbursementDaoImp();
 
        /*
         List<User> users = new ArrayList<>();
@@ -37,18 +42,29 @@ public class JavalinApp {
         }
 
         */
-        User u = new User("test", "test", "Ray", "Mabbs",
-                "test@test.com", EMPLOYEE);
-
-        if(test.createUser(u)){
+        //User u = new User("testtt", "testtt", "Rayy", "Mabbsy", "test4@test4.com",17);
+/*
+        if(test.getUserById(6)) {
             System.out.println("Database Updated Successfully");
-        }
-        else {
+
+        } else {
             System.out.println("Something went wrong...");
         }
 
-
-
+        User u = test.getUserByUsernameAndPassword("jpatrick1", "W9PGkFtYur");
+        if (u != null){
+            System.out.println(u.toString());
+        } else {
+            System.out.println("Something went wrong");
+        }
+*/
+        Date d = new Date();
+        Reimbursement r = new Reimbursement(2368.49, new java.sql.Date(12/31/2021), new java.sql.Date(10/25/2021), "Algoneurodystrophy, left lower leg", null);
+        if(test2.createRequest(r)){
+            System.out.println(r.toString());
+        } else {
+            System.out.println("Something went wrong :(");
+        }
 
 
         //Javalin runs until "close" is typed into the console

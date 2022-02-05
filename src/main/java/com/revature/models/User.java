@@ -30,6 +30,15 @@ public class User {
         this.id = id;
     }
 
+    public User(String username,String password,String fname,String lname,String email, int id){
+        this.username = username;
+        this.password = password;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

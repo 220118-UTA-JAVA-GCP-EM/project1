@@ -14,6 +14,43 @@ public class Reimbursement {
     private Receipt receipt;
 
     private int author;
+    private int resolver;
+    private int statusId;
+    private int typeId;
+
+    public Reimbursement(){
+
+    }
+
+    public Reimbursement(Double amount, Date submitted, Date resolved, String description, Receipt receipt,
+                         int author, int resolver, int statusId, int typeId) {
+        this.amount = amount;
+        this.submitted = submitted;
+        this.resolved = resolved;
+        this.description = description;
+        this.receipt = receipt;
+        this.author = author;
+        this.resolver = resolver;
+        this.statusId = statusId;
+        this.typeId = typeId;
+    }
+
+    public Reimbursement(Double amount, Date submitted, Date resolved, String description, Receipt receipt) {
+
+        this.amount = amount;
+        this.submitted = submitted;
+        this.resolved = resolved;
+        this.description = description;
+        this.receipt = receipt;
+    }
+
+    public String toString(){
+        return "ID#" + this.id + " " +
+                "Author: " + this.author + " " + "\n" +
+                "Amount: " + this.amount + "\n" +
+                "StatusId: " + this.statusId + "\n" +
+                "TypeId: " + this.typeId + "\n";
+    }
 
     public int getId() {
         return id;
@@ -94,8 +131,4 @@ public class Reimbursement {
     public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
-
-    private int resolver;
-    private int statusId;
-    private int typeId;
 }

@@ -29,26 +29,30 @@ public class UserDaoImp implements UserDao{
             ps.setString(5, u.getEmail());
             //ps.setInt(6, u.getRoleId().ordinal());
 
-
+            int rowsAffected = ps.executeUpdate();
+            if(rowsAffected==1){return true;}
         }
         catch (SQLException e){
             e.printStackTrace();;
         }
 
-        String sql2 = "insert into project1.user_roles (id, user_role) values (?,?)";
-        try (Connection con2 = ConnectionUtil.getConnection();
-        PreparedStatement ps2 = con2.prepareStatement(sql2);){
+        return false;
+    }
 
+    //set up service and controller first!!
+    public boolean createRole(User u){
+        String sql = "insert into project1.user_roles (id, user_role) values (?,?)";
+        try (Connection con = ConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);){
 
-            ps2.setInt(1, u.getId());
-            ps2.setInt(2, u.getRoleId().ordinal());
+            //u.setId();
+            ps.setInt(1, u.getId());
+            ps.setInt(2, u.getRoleId().ordinal());
 
-            int rowsAffected = ps2.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
             if(rowsAffected==1){return true;}
 
-            }
-
-
+        }
         catch (SQLException e){
             e.printStackTrace();
         }
@@ -56,7 +60,7 @@ public class UserDaoImp implements UserDao{
     }
 
     public boolean updateUser(User u){
-        String sql = "update project1.user set username = ? , password = ? , fname = ? , lname = ?, email = ?   where id = ? ";
+        String sql = "update project1.user set username = ? , password = ? , fname = ? , lname = ?, email = ? where id = ? ";
 
         try(Connection con = ConnectionUtil.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);){
@@ -66,8 +70,8 @@ public class UserDaoImp implements UserDao{
             ps.setString(3, u.getFname());
             ps.setString(4, u.getLname());
             ps.setString(5, u.getEmail());
-            ps.setInt(6, u.getRoleId().ordinal());
-            ps.setInt(7, u.getId());
+            //ps.setInt(6, u.getRoleId().ordinal());
+            ps.setInt(6, u.getId());
 
             int rowsAffected = ps.executeUpdate();
 
@@ -122,12 +126,82 @@ public class UserDaoImp implements UserDao{
     }
 
     @Override
-    public User getUserById() {
+    public User getUserById(int id) {
+        String sql = "select * from project1.user where id = ?";
+
+        try(Connection con = ConnectionUtil.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);){
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+
+            if (rs.next()){
+                User u = new User();
+
+
+                //int id = rs.getInt("id");
+                u.setId(id);
+                u.setUsername(rs.getString("username"));
+                u.setPassword(rs.getString("password"));
+                u.setFname(rs.getString("fname"));
+                u.setLname(rs.getString("lname"));
+                u.setEmail(rs.getString("email"));
+
+                //gives the ENUMS a  numeric value
+                UserRole[] roles = UserRole.values();
+
+                int roleOrdinal = rs.getInt(("roleid"));
+                u.setRoleId(roles[roleOrdinal]);
+
+                return u;
+            }
+        }
+        catch (SQLException e) {
+            logger.info("Caught SQL exception");
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public User getUserByUsernameAndPassword() {
+    public User getUserByUsernameAndPassword(String user, String pass) {
+        //We pass in the id and query the DB by that id
+        String sql = "select * from project1.user where username = ? and password = ?";
+
+        try (Connection con = ConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);) {
+
+            ps.setString(1, user);
+            ps.setString(2, pass);
+
+            ResultSet rs = ps.executeQuery();
+
+
+            if (rs.next()) {
+                //then we convert result set to a User object and return it
+                User u = new User();
+
+                u.setId(rs.getInt("id"));
+                u.setUsername(rs.getString("username"));
+                u.setPassword(rs.getString("password"));
+                u.setFname(rs.getString("fname"));
+                u.setLname(rs.getString("lname"));
+                u.setEmail(rs.getString("email"));
+
+                //gives the ENUMS a  numeric value
+                UserRole[] roles = UserRole.values();
+
+                int roleOrdinal = rs.getInt(("roleid"));
+                u.setRoleId(roles[roleOrdinal]);
+
+                return u;
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
