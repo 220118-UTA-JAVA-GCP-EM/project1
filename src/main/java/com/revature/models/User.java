@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import com.revature.models.UserRole;
+
 public class User {
     private int id;
     private String username;

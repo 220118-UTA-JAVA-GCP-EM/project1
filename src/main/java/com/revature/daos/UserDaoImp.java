@@ -15,8 +15,7 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public boolean createUser(User u) {
-        String sql = "insert into project1.user (username,password,fname,lname,email) values (?,?,?,?,?)";
-
+        String sql = "insert into project1.user (username,password,fname,lname,email, roleid) values (?,?,?,?,?,?)";
 
 
         try(Connection con = ConnectionUtil.getConnection();
@@ -27,35 +26,15 @@ public class UserDaoImp implements UserDao{
             ps.setString(3, u.getFname());
             ps.setString(4, u.getLname());
             ps.setString(5, u.getEmail());
-            //ps.setInt(6, u.getRoleId().ordinal());
+            ps.setInt(6, u.getRoleId().ordinal() + 1);
 
             int rowsAffected = ps.executeUpdate();
             if(rowsAffected==1){return true;}
-        }
-        catch (SQLException e){
-            e.printStackTrace();;
-        }
-
-        return false;
-    }
-
-    //set up service and controller first!!
-    public boolean createRole(User u){
-        String sql = "insert into project1.user_roles (id, user_role) values (?,?)";
-        try (Connection con = ConnectionUtil.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql);){
-
-            //u.setId();
-            ps.setInt(1, u.getId());
-            ps.setInt(2, u.getRoleId().ordinal());
-
-            int rowsAffected = ps.executeUpdate();
-            if(rowsAffected==1){return true;}
-
         }
         catch (SQLException e){
             e.printStackTrace();
         }
+
         return false;
     }
 

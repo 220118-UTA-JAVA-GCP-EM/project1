@@ -1,5 +1,6 @@
 package com.revature.models;
 
+
 import java.sql.Date;
 
 public class Reimbursement {
@@ -35,13 +36,17 @@ public class Reimbursement {
         this.typeId = typeId;
     }
 
-    public Reimbursement(Double amount, Date submitted, Date resolved, String description, Receipt receipt) {
+    public Reimbursement(Double amount, Date submitted, String description, int author, int typeId) {
 
         this.amount = amount;
         this.submitted = submitted;
-        this.resolved = resolved;
         this.description = description;
-        this.receipt = receipt;
+        this.author = author;
+//        this.statusId = statusId;
+        setStatusId(1);
+        this.statusId = getStatusId();
+        this.typeId = typeId;
+
     }
 
     public String toString(){
@@ -49,7 +54,9 @@ public class Reimbursement {
                 "Author: " + this.author + " " + "\n" +
                 "Amount: " + this.amount + "\n" +
                 "StatusId: " + this.statusId + "\n" +
-                "TypeId: " + this.typeId + "\n";
+                "TypeId: " + this.typeId + "\n" +
+                "Submitted: " + this.submitted + "\n" +
+                "Resolved: " + this.resolved + "\n";
     }
 
     public int getId() {

@@ -41,10 +41,11 @@ public class JavalinApp {
             System.out.println(users.get(i).toString());
         }
 
-        */
-        //User u = new User("testtt", "testtt", "Rayy", "Mabbsy", "test4@test4.com",17);
-/*
-        if(test.getUserById(6)) {
+
+
+        User u = new User("Lix", "asdfghjk", "Nabiatu", "Kalokoh", "nabi@gmail.com", MANAGER);
+
+        if(test.createUser(u)) {
             System.out.println("Database Updated Successfully");
 
         } else {
@@ -57,12 +58,21 @@ public class JavalinApp {
         } else {
             System.out.println("Something went wrong");
         }
-*/
+
         Date d = new Date();
         Reimbursement r = new Reimbursement(2368.49, new java.sql.Date(12/31/2021), new java.sql.Date(10/25/2021), "Algoneurodystrophy, left lower leg", null);
         if(test2.createRequest(r)){
             System.out.println(r.toString());
         } else {
+            System.out.println("Something went wrong :(");
+        }
+*/
+        User u = test.getUserById(9);
+        Reimbursement r = new Reimbursement(8409.71, new java.sql.Date(7/23/2021), "Rheumatoid arthritis w/o rheumatoid factor, unsp shoulder", 9,3);
+
+        if(test2.createRequest(r, u)){
+            System.out.println(r.toString());
+        }else{
             System.out.println("Something went wrong :(");
         }
 
