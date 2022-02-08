@@ -93,4 +93,29 @@ public class ReimbursementDaoImp implements ReimbursementDao {
         return false;
     }
 
+    @Override
+    public boolean deleteRequest(int id) {
+        String sql = "delete from project1.reimbursements where id = ?";
+
+        try(Connection con = ConnectionUtil.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);){
+
+            ps.setInt(1, id);
+
+            int rowsAffected = ps.executeUpdate();
+
+            if(rowsAffected==0){
+                return false;
+            }
+
+            return true;
+
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

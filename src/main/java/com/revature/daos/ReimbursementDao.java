@@ -7,6 +7,7 @@ public interface ReimbursementDao {
     public boolean createRequest(Reimbursement r, User u);
     public Reimbursement viewRequest(int id);
     public boolean updateRequest(Reimbursement r, User u);
+    public boolean deleteRequest(int id);
     //might need this later
     //public void filterRequest();
 }

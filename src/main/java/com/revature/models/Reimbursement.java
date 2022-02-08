@@ -49,6 +49,13 @@ public class Reimbursement {
 
     }
 
+    public Reimbursement(Date resolved, int resolver, int statusId, int id) {
+        this.resolved = resolved;
+        this.resolver = resolver;
+        this.statusId = statusId;
+        this.id = id;
+    }
+
     public String toString(){
         return "ID#" + this.id + " " +
                 "Author: " + this.author + " " + "\n" +

@@ -31,10 +31,7 @@ public class JavalinApp {
 
         Javalin app = Javalin.create().start(8080);
 
-        UserDao test = new UserDaoImp();
-        ReimbursementDao test2 = new ReimbursementDaoImp();
-
-       /*
+              /*
         List<User> users = new ArrayList<>();
         users = test.getAllUsers();
         for (int i=0; i<users.size();i++) {
@@ -67,15 +64,33 @@ public class JavalinApp {
             System.out.println("Something went wrong :(");
         }
 */
-        User u = test.getUserById(9);
-        Reimbursement r = new Reimbursement(8409.71, new java.sql.Date(7/23/2021), "Rheumatoid arthritis w/o rheumatoid factor, unsp shoulder", 9,3);
-
+        /*
         if(test2.createRequest(r, u)){
             System.out.println(r.toString());
         }else{
             System.out.println("Something went wrong :(");
         }
 
+
+        if(test2.deleteReimbursement(1)){
+            System.out.println("Database updated successfully");
+        } else {
+            System.out.println("Something went wrong");
+        }
+
+
+         */
+
+        UserDao test = new UserDaoImp();
+        ReimbursementDao test2 = new ReimbursementDaoImp();
+        User u = test.getUserById(9);
+        Reimbursement r = new Reimbursement( new java.sql.Date(7/23/2021), u.getId(), 2, 6);
+
+        if (test2.updateRequest(r, u)) {
+            System.out.println("Database updated successfully");
+        } else {
+            System.out.println("Something went wrong");
+        }
 
         //Javalin runs until "close" is typed into the console
         Scanner scan = new Scanner(System.in);

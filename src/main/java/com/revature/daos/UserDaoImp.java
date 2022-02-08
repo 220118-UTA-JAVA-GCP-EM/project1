@@ -183,4 +183,27 @@ public class UserDaoImp implements UserDao{
         }
         return null;
     }
+
+    @Override
+    public boolean deleteUser(int id) {
+
+        String sql = "delete from project1.user where id = ?";
+
+        try (Connection con = ConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);) {
+
+            ps.setInt(1, id);
+
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected == 0) {
+                return false;
+            }
+            return true;
+        } catch (SQLException e) {
+            logger.info("Caught SQL exception");
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
