@@ -1,5 +1,6 @@
 package com.revature.models;
 
+
 import java.sql.Date;
 
 public class Reimbursement {
@@ -14,6 +15,56 @@ public class Reimbursement {
     private Receipt receipt;
 
     private int author;
+    private int resolver;
+    private int statusId;
+    private int typeId;
+
+    public Reimbursement(){
+
+    }
+
+    public Reimbursement(Double amount, Date submitted, Date resolved, String description, Receipt receipt,
+                         int author, int resolver, int statusId, int typeId) {
+        this.amount = amount;
+        this.submitted = submitted;
+        this.resolved = resolved;
+        this.description = description;
+        this.receipt = receipt;
+        this.author = author;
+        this.resolver = resolver;
+        this.statusId = statusId;
+        this.typeId = typeId;
+    }
+
+    public Reimbursement(Double amount, Date submitted, String description, int author, int typeId) {
+
+        this.amount = amount;
+        this.submitted = submitted;
+        this.description = description;
+        this.author = author;
+//        this.statusId = statusId;
+        setStatusId(1);
+        this.statusId = getStatusId();
+        this.typeId = typeId;
+
+    }
+
+    public Reimbursement(Date resolved, int resolver, int statusId, int id) {
+        this.resolved = resolved;
+        this.resolver = resolver;
+        this.statusId = statusId;
+        this.id = id;
+    }
+
+    public String toString(){
+        return "ID#" + this.id + " " +
+                "Author: " + this.author + " " + "\n" +
+                "Amount: " + this.amount + "\n" +
+                "StatusId: " + this.statusId + "\n" +
+                "TypeId: " + this.typeId + "\n" +
+                "Submitted: " + this.submitted + "\n" +
+                "Resolved: " + this.resolved + "\n";
+    }
 
     public int getId() {
         return id;
@@ -94,8 +145,4 @@ public class Reimbursement {
     public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
-
-    private int resolver;
-    private int statusId;
-    private int typeId;
 }
