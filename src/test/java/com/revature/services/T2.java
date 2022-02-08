@@ -1,0 +1,64 @@
+package com.revature.services;
+import com.revature.daos.ReimbursementDao;
+import com.revature.models.Reimbursement;
+import com.revature.models.User;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
+public class T2 {
+    @Mock
+    ReimbursementDao rd;
+
+
+    @InjectMocks
+    ReimbursementService rs;
+    User u;
+    Reimbursement r;
+
+    @Before
+    public void setup(){
+        MockitoAnnotations.openMocks(this);
+    }
+    @Test
+    public void testCreateRequest(){
+
+        u = new User();
+        r = new Reimbursement();
+
+        when(rd.createRequest(r,u)).thenReturn(true);
+        assertTrue(rs.createRequest(r,u));
+    }
+    @Test
+    public void testViewRequest(){
+        r = new Reimbursement();
+
+        when(rd.viewRequest(2)).thenReturn(r);
+
+        assertNotNull(rs.viewRequest(2));
+    }
+    @Test
+    public void testUpdateRequest(){
+        r = new Reimbursement();
+        u = new User();
+
+        when(rd.updateRequest(r,u)).thenReturn(true);
+
+        assertTrue(rs.updateRequest(r,u));
+    }
+    @Test
+    public void testDeleteRequest(){
+        r = new Reimbursement();
+        u = new User();
+
+        when(rd.deleteRequest(2)).thenReturn(true);
+
+        assertTrue(rs.deleteRequest(2));
+    }
+}
