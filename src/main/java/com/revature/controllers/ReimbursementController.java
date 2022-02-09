@@ -5,6 +5,7 @@ import com.revature.models.User;
 import com.revature.services.ReimbursementService;
 import io.javalin.http.Context;
 
+import java.sql.Date;
 import java.util.List;
 
 public class ReimbursementController {
@@ -18,6 +19,8 @@ public class ReimbursementController {
 
     public void handleCreateRequest(Context ctx){
         Reimbursement r = ctx.bodyAsClass(Reimbursement.class);
+        //String.getSubmitted();
+
         User u = ctx.bodyAsClass(User.class);
         boolean success = rs.createRequest(r,u);
 

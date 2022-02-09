@@ -1,8 +1,0 @@
-INFO - 2022-02-04T15:36:41.369 - Caught SQL exception
-INFO - 2022-02-04T15:38:37.841 - Caught SQL exception
-INFO - 2022-02-04T15:40:31.339 - Caught SQL exception
-INFO - 2022-02-04T15:41:21.769 - Caught SQL exception
-INFO - 2022-02-04T15:44:37.295 - Caught SQL exception
-INFO - 2022-02-04T15:46:03.958 - Caught SQL exception
-INFO - 2022-02-04T15:47:40.131 - Caught SQL exception
-INFO - 2022-02-04T15:48:04.479 - Caught SQL exception

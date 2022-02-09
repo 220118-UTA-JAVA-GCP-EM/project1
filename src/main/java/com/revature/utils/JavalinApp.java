@@ -3,48 +3,27 @@ package com.revature.utils;
 import com.revature.controllers.AuthController;
 import com.revature.controllers.ReimbursementController;
 import com.revature.controllers.UserController;
-import com.revature.daos.ReimbursementDao;
-import com.revature.daos.ReimbursementDaoImp;
-import com.revature.daos.UserDao;
-import com.revature.daos.UserDaoImp;
-import com.revature.models.Reimbursement;
-import com.revature.models.User;
-import com.revature.models.UserRole;
 import io.javalin.Javalin;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
-import static com.revature.models.UserRole.EMPLOYEE;
-import static com.revature.models.UserRole.MANAGER;
-
 public class JavalinApp {
 
-    LoggingUtil logger = new LoggingUtil();
-
-    UserController uc = new UserController();
-    ReimbursementController rc = new ReimbursementController();
-    AuthController auth = new AuthController();
-    //LoggingUtil logger = new LoggingUtil();
-
-    private Javalin app = Javalin.create().routes(() -> {
-
-        //require a valid token for all account and customer activities
-       /*
-        before("account", auth::authorizeToken);
-        before("account/*", auth::authorizeToken);
-        before("customer", auth::authorizeToken);
-        before("customer/*", auth::authorizeToken);
+    static LoggingUtil logger = new LoggingUtil();
+    static UserController uc = new UserController();
+    static ReimbursementController rc = new ReimbursementController();
+    static AuthController auth = new AuthController();
 
 
-        */
+    /*
+
+
+    //private Javalin app = Javalin.create().routes(() -> {
 
         //before making an account
-        path("user", () -> {
+        path("/user", () -> {
             post(uc::handleCreateUser);
         });
 
@@ -96,22 +75,25 @@ public class JavalinApp {
         });
         before("*", logger::logRequest);
     });
+*/
 
 
     public static void main(String[] args) {
-        Javalin app = Javalin.create().start(8080);
+        Javalin app = Javalin.create(config -> {config.enableCorsForAllOrigins();});
 
-        //Javalin runs until "close" is typed into the console
-        Scanner scan = new Scanner(System.in);
-        while (true) {
+        //Initial logins
+        app.post("/user", uc::handleCreateUser);
+        app.post("/login", auth::authenticateLogin);
 
-            String input = scan.nextLine();
 
-            //if "close is entered, Javalin closes and the app closes
-            if (input.equals("close")) {
-                app.close();
-                break;
-            }
-        }
+        //employee stuff
+        app.get("/employee/user/{id}", uc::handleGetUserById);
+        app.put("/employee/user/{id}", uc::handleUpdateUser);
+        app.post("/employee/request", rc::handleCreateRequest);
+        app.get("/employee/request/{id}", rc::handleGetRequestById);
+
+
+
+        app.start(8080);
     }
 }

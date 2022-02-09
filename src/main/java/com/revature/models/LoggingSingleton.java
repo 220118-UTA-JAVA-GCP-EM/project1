@@ -28,7 +28,7 @@ public class LoggingSingleton {
 
     private LoggingSingleton(){
         try{
-            fileWriter = new BufferedWriter(new FileWriter(FILE,true));
+            fileWriter = new BufferedWriter(new FileWriter(FILE,false));
         }
         catch(IOException e){
             e.printStackTrace();
