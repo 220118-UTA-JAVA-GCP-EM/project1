@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.daos.UserDaoImp;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import io.javalin.http.Context;
@@ -10,8 +11,8 @@ public class UserController {
     UserService us = new UserService();
 
     public void handleCreateUser(Context ctx){
-        User newUser = ctx.bodyAsClass(User.class);
-        boolean success = us.createUser(newUser);
+        User u = ctx.bodyAsClass(User.class);
+        boolean success = us.createUser(u);
 
         if (success){
             ctx.status(201);
@@ -21,7 +22,8 @@ public class UserController {
     }
 
     public void handleUpdateUser(Context ctx){
-
+        User u = ctx.bodyAsClass(User.class);
+        boolean success = us.updateUser(u);
     }
 
     public void handleGetAllUsers(Context ctx){
@@ -36,4 +38,6 @@ public class UserController {
     public void handleGetUserByUsernameAndPassword(Context ctx){
 
     }
+
+    public void handleDeleteUser(){}
 }

@@ -11,9 +11,16 @@ import org.eclipse.jetty.server.Authentication;
 import java.util.List;
 
 public class UserService {
+    UserDao ud = new UserDaoImp();
 
-    private UserDao ud = new UserDaoImp();
+/*
+    public UserService(UserDao ud){
+        this.ud = ud;
 
+    }
+
+
+ */
     public boolean createUser(String username, String password, String fname, String lname, String email, UserRole roleId){
         User u = new User(username, password, fname, lname, email, roleId);
         return ud.createUser(u);
@@ -36,7 +43,12 @@ public class UserService {
         return ud.getUserById(id);
     }
 
-    public User getUserByUsernameAndPassword(String user, String pass){
+    public User getUserByUsernameAndPassword(String user, String pass) {
         return ud.getUserByUsernameAndPassword(user, pass);
     }
+
+    public boolean deleteUser(int id){
+            return ud.deleteUser(id);
+        }
+
 }

@@ -1,5 +1,7 @@
 package com.revature.utils;
 
+import com.revature.controllers.ReimbursementController;
+import com.revature.controllers.UserController;
 import com.revature.daos.ReimbursementDao;
 import com.revature.daos.ReimbursementDaoImp;
 import com.revature.daos.UserDao;
@@ -28,8 +30,6 @@ public class JavalinApp {
 */
 
     public static void main(String[] args) {
-
-        Javalin app = Javalin.create().start(8080);
 
               /*
         List<User> users = new ArrayList<>();
@@ -79,7 +79,7 @@ public class JavalinApp {
         }
 
 
-         */
+
 
         UserDao test = new UserDaoImp();
         ReimbursementDao test2 = new ReimbursementDaoImp();
@@ -91,6 +91,65 @@ public class JavalinApp {
         } else {
             System.out.println("Something went wrong");
         }
+
+         */
+
+        UserController uc = new UserController();
+        ReimbursementController rc = new ReimbursementController();
+        //AuthController auth = new AuthController();
+        LoggingUtil logger = new LoggingUtil();
+
+        /*
+
+        private Javalin app = Javalin.create().routes(() -> {
+
+            //require a valid token for all account and customer activities
+           /*
+            before("account", auth::authorizeToken);
+            before("account/*", auth::authorizeToken);
+            before("customer", auth::authorizeToken);
+            before("customer/*", auth::authorizeToken);
+
+            */
+        /*
+            post("login", cc::handleCreateCustomer);
+
+            path("customer", () -> {
+                get(cc::handleGetAll);
+                delete(cc::handleDelete);
+                path("{id}", () -> {
+                    get(cc::handleGetById);
+                });
+            });
+            path("account", () -> {
+                get(ac::handleGetAll);
+                post(ac::handleCreateAccount);
+                delete(ac::handleDelete);
+                path("transfer", () -> {
+                    put(ac::handleTransfer);
+                });
+                path("deposit", () -> {
+                    put(ac::handleDeposit);
+                });
+                path("withdraw", () -> {
+                    put(ac::handleWithdraw);
+                });
+                path("{id}", () -> {
+                    get(ac::handleGetById);
+                });
+            });
+            path("login", () -> {
+                post(auth::authenticateLogin);
+            });
+            before("*", logger::logRequest);
+
+
+        });
+*/
+
+
+
+        Javalin app = Javalin.create().start(8080);
 
         //Javalin runs until "close" is typed into the console
         Scanner scan = new Scanner(System.in);
