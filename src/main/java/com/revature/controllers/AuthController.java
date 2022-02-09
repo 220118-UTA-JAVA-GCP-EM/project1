@@ -30,15 +30,36 @@ import io.javalin.http.UnauthorizedResponse;
                     ctx.header("Authorization", authToken);
                     ctx.status(200);
                 }
+                if(u.getRoleId() == UserRole.EMPLOYEE){
+                    String authToken = u.getRoleId() + "-TOKEN";
+
+                    //we send auth information back to the client in the header
+                    ctx.header("Authorization", authToken);
+                    ctx.status(200);
+                }
 
                 }
             }
 
 
-        public void authorizeToken(Context ctx){
+        public void authorizeManager(Context ctx){
             String authHeader = ctx.header("Authorization");
             if(authHeader!=null){
                 if(authHeader.equals("MANAGER-TOKEN")){
+                    return;
+                } else {
+                    throw new ForbiddenResponse("You do not have access to this feature");
+                }
+            }
+
+            throw new UnauthorizedResponse("You must login to continue");
+
+        }
+
+        public void authorizeEmployee(Context ctx){
+            String authHeader = ctx.header("Authorization");
+            if(authHeader!=null){
+                if(authHeader.equals("EMPLOYEE-TOKEN")){
                     return;
                 } else {
                     throw new ForbiddenResponse("You do not have access to this feature");

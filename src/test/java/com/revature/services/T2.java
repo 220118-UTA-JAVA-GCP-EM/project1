@@ -8,6 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
@@ -36,12 +39,12 @@ public class T2 {
         assertTrue(rs.createRequest(r,u));
     }
     @Test
-    public void testViewRequest(){
+    public void testGetRequest(){
         r = new Reimbursement();
 
-        when(rd.viewRequest(2)).thenReturn(r);
+        when(rd.getRequest(2)).thenReturn(r);
 
-        assertNotNull(rs.viewRequest(2));
+        assertNotNull(rs.getRequest(2));
     }
     @Test
     public void testUpdateRequest(){
@@ -60,5 +63,14 @@ public class T2 {
         when(rd.deleteRequest(2)).thenReturn(true);
 
         assertTrue(rs.deleteRequest(2));
+    }
+    @Test
+    public void testGetAllRequests(){
+        r = new Reimbursement();
+        List<Reimbursement> listR = new ArrayList<>();
+        listR.add(r);
+        when(rd.getAllRequests()).thenReturn(listR);
+
+        assertNotNull(rd.getAllRequests());
     }
 }

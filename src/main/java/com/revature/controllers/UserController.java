@@ -24,6 +24,12 @@ public class UserController {
     public void handleUpdateUser(Context ctx){
         User u = ctx.bodyAsClass(User.class);
         boolean success = us.updateUser(u);
+
+        if (success){
+            ctx.status(200);
+        }else{
+            ctx.status(400);
+        }
     }
 
     public void handleGetAllUsers(Context ctx){
@@ -32,12 +38,21 @@ public class UserController {
     }
 
     public void handleGetUserById(Context ctx){
-
+        String idPara = ctx.pathParam("id");
+        int id = Integer.parseInt(idPara);
+        User u = us.getUserById(id);
+        ctx.json(u);
     }
 
-    public void handleGetUserByUsernameAndPassword(Context ctx){
+    public void handleDeleteUser(Context ctx){
+        String idPara = ctx.pathParam("id");
+        int id = Integer.parseInt(idPara);
+        boolean success = us.deleteUser(id);
 
+        if (success){
+            ctx.status(200);
+        }else{
+            ctx.status(400);
+        }
     }
-
-    public void handleDeleteUser(){}
 }

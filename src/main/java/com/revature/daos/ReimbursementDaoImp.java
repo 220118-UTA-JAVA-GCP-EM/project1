@@ -7,6 +7,8 @@ import com.revature.models.UserRole;
 import com.revature.utils.ConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReimbursementDaoImp implements ReimbursementDao {
 
@@ -36,7 +38,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
     }
 
     @Override
-    public Reimbursement viewRequest(int id){
+    public Reimbursement getRequest(int id){
         String sql = "SELECT * FROM project1.reimbursements where id = ?";
 
         try(Connection con = ConnectionUtil.getConnection();
@@ -116,6 +118,40 @@ public class ReimbursementDaoImp implements ReimbursementDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Reimbursement> getAllRequests(){
+        List<Reimbursement> requests = new ArrayList<>();
+
+        String sql = "SELECT * FROM project1.reimbursements";
+
+        try(Connection con = ConnectionUtil.getConnection();
+            Statement s = con.createStatement();){
+
+            ResultSet rs = s.executeQuery(sql);
+
+            while(rs.next()){
+                Reimbursement r = new Reimbursement();
+
+                int id = rs.getInt("id");
+                r.setId(id);
+                r.setAmount(rs.getDouble("amount"));
+                r.setSubmitted(rs.getDate("submitted"));
+                r.setResolved(rs.getDate("resolved"));
+                r.setDescription(rs.getString("description"));
+                r.setAuthor(rs.getInt("author"));
+                r.setResolver(rs.getInt("resolver"));
+                r.setStatusId(rs.getInt("statusid"));
+                r.setTypeId(rs.getInt("typeid"));
+
+                requests.add(r);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return requests;
     }
 
 }
