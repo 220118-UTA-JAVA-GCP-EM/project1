@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.revature.services.T1" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-02-08T22:28:29" hostname="DESKTOP-TIIUBDO" time="0.601">
+<testsuite name="com.revature.services.T1" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-02-09T19:10:28" hostname="DESKTOP-G06PAQD" time="0.866">
   <properties/>
-  <testcase name="testGetAllUsers" classname="com.revature.services.T1" time="0.595"/>
-  <testcase name="testdeleteUser" classname="com.revature.services.T1" time="0.003"/>
-  <testcase name="testGetUserByUsernameAndPassword" classname="com.revature.services.T1" time="0.001"/>
+  <testcase name="testGetAllUsers" classname="com.revature.services.T1" time="0.845"/>
+  <testcase name="testdeleteUser" classname="com.revature.services.T1" time="0.008"/>
+  <testcase name="testGetUserByUsernameAndPassword" classname="com.revature.services.T1" time="0.005"/>
   <testcase name="testGetUserById" classname="com.revature.services.T1" time="0.001"/>
-  <testcase name="testCreate" classname="com.revature.services.T1" time="0.001"/>
-  <testcase name="testUpdate" classname="com.revature.services.T1" time="0.0"/>
+  <testcase name="testCreate" classname="com.revature.services.T1" time="0.002"/>
+  <testcase name="testUpdate" classname="com.revature.services.T1" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
