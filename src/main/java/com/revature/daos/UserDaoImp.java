@@ -29,10 +29,14 @@ public class UserDaoImp implements UserDao{
             ps.setInt(6, u.getRoleId().ordinal() + 1);
 
             int rowsAffected = ps.executeUpdate();
-            if(rowsAffected==1){return true;}
+            if(rowsAffected==1){
+                logger.info("Database was updated successfully");
+                return true;
+            }
         }
         catch (SQLException e){
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
 
         return false;
@@ -54,11 +58,15 @@ public class UserDaoImp implements UserDao{
 
             int rowsAffected = ps.executeUpdate();
 
-            if (rowsAffected==1){return true;}
+            if (rowsAffected==1){
+                logger.info("Database was updated successfully");
+                return true;
+            }
 
         }
         catch (SQLException e){
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
 
         return false;
@@ -96,10 +104,11 @@ public class UserDaoImp implements UserDao{
 
                 users.add(u);
             }
+            logger.info("Users obtained from database successfully");
         }
         catch (SQLException e) {
-            logger.info("Caught SQL exception");
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return users;
     }
@@ -134,12 +143,13 @@ public class UserDaoImp implements UserDao{
                 int roleOrdinal = rs.getInt(("roleid"));
                 u.setRoleId(roles[roleOrdinal]);
 
+                logger.info("User obtained from database successfully");
                 return u;
             }
         }
         catch (SQLException e) {
-            logger.info("Caught SQL exception");
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return null;
     }
@@ -175,11 +185,13 @@ public class UserDaoImp implements UserDao{
                 int roleOrdinal = rs.getInt(("roleid"));
                 u.setRoleId(roles[roleOrdinal]);
 
+                logger.info("User obtained from database successfully");
                 return u;
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return null;
     }
@@ -197,12 +209,14 @@ public class UserDaoImp implements UserDao{
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected == 0) {
+                logger.warn("Something went wrong - this request can't be removed");
                 return false;
             }
+            logger.info("Database was updated successfully");
             return true;
         } catch (SQLException e) {
-            logger.info("Caught SQL exception");
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return false;
     }

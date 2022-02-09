@@ -1,9 +1,6 @@
 package com.revature.daos;
 
-import com.revature.models.Receipt;
-import com.revature.models.Reimbursement;
-import com.revature.models.User;
-import com.revature.models.UserRole;
+import com.revature.models.*;
 import com.revature.utils.ConnectionUtil;
 
 import java.sql.*;
@@ -11,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReimbursementDaoImp implements ReimbursementDao {
+    LoggingSingleton logger = LoggingSingleton.getLogger();
 
     @Override
     public boolean createRequest(Reimbursement r, User u){
@@ -28,12 +26,15 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 
 
             int rowsAffected = ps.executeUpdate();
-            if(rowsAffected==1){return true;}
+            if(rowsAffected==1){
+                logger.info("Database was updated successfully");
+                return true;
+            }
         }
         catch (SQLException e){
-            e.printStackTrace();;
+            e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
-
         return false;
     }
 
@@ -62,11 +63,15 @@ public class ReimbursementDaoImp implements ReimbursementDao {
                 r.setStatusId(rs.getInt("statusid"));
                 r.setTypeId(rs.getInt("typeid"));
 
+                logger.info("Request obtained from database successfully");
+
                 return r;
+
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return null;
     }
@@ -85,11 +90,15 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 
             int rowsAffected = ps.executeUpdate();
 
-            if (rowsAffected==1){return true;}
+            if (rowsAffected==1){
+                logger.info("Database was updated successfully");
+                return true;
+            }
 
         }
         catch (SQLException e){
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
 
         return false;
@@ -107,15 +116,17 @@ public class ReimbursementDaoImp implements ReimbursementDao {
             int rowsAffected = ps.executeUpdate();
 
             if(rowsAffected==0){
+                logger.warn("Something went wrong - this request can't be removed");
                 return false;
             }
-
+            logger.info("Database was updated successfully");
             return true;
 
         }
 
         catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return false;
     }
@@ -147,9 +158,11 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 
                 requests.add(r);
             }
+            logger.info("Requests obtained from database successfully");
         }
         catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return requests;
     }
