@@ -36,7 +36,7 @@ public class Reimbursement {
         this.typeId = typeId;
     }
 
-    public Reimbursement(Double amount, Date submitted, String description, int author, int typeId) {
+    public Reimbursement(Double amount, Date submitted, String description, int author, int statusId, int typeid) {
 
         this.amount = amount;
         this.submitted = submitted;
@@ -45,7 +45,7 @@ public class Reimbursement {
 //        this.statusId = statusId;
         setStatusId(1);
         this.statusId = getStatusId();
-        this.typeId = typeId;
+        this.typeId = typeid;
 
     }
 

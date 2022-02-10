@@ -3,6 +3,7 @@ package com.revature.controllers;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.services.ReimbursementService;
+import com.revature.services.UserService;
 import io.javalin.http.Context;
 
 import java.sql.Date;
@@ -16,12 +17,19 @@ public class ReimbursementController {
         List<Reimbursement> r = rs.getAllRequests();
         ctx.json(r);
     }
+    public void handleGetAllRequestsById(Context ctx){
+        String idParam = ctx.pathParam("id");
+        int id = Integer.parseInt(idParam);
+
+        List<Reimbursement> r = rs.getAllRequestsById(id);
+        ctx.json(r);
+    }
 
     public void handleCreateRequest(Context ctx){
         Reimbursement r = ctx.bodyAsClass(Reimbursement.class);
-        //String.getSubmitted();
+        UserService us = new UserService();
 
-        User u = ctx.bodyAsClass(User.class);
+        User u = us.getUserById(r.getAuthor());
         boolean success = rs.createRequest(r,u);
 
         if (success){
@@ -53,9 +61,17 @@ public class ReimbursementController {
     }
 
     public void handleUpdateRequest(Context ctx){
-        Reimbursement r = ctx.bodyAsClass(Reimbursement.class);
-        User u = ctx.bodyAsClass(User.class);
-        boolean success = rs.updateRequest(r, u);
+        Resolver r = ctx.bodyAsClass(Resolver.class);
+
+        UserService us = new UserService();
+
+        String reimbursementId = ctx.pathParam("id");
+
+        Reimbursement r2 = rs.getRequest(Integer.parseInt(reimbursementId));
+
+        User u = us.getUserById(r.resolver);
+        r2.setStatusId(r.statusId);
+        boolean success = rs.updateRequest(r2,u);
 
         if (success){
             ctx.status(200);
@@ -63,5 +79,14 @@ public class ReimbursementController {
             ctx.status(400);
         }
 
+    }
+}
+
+class Resolver{
+    public int resolver;
+    public int statusId;
+
+    public String toString(){
+        return ""+ resolver + " " + statusId;
     }
 }

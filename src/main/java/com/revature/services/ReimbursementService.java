@@ -25,4 +25,8 @@ public class ReimbursementService {
     public List<Reimbursement> getAllRequests(){
         return rd.getAllRequests();
     }
+    public List<Reimbursement> getAllRequestsById(int id){
+        return rd.getAllRequestsById(id);
+   }
+
 }
