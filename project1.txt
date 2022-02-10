@@ -1,8 +1,24 @@
-INFO - 2022-02-04T15:36:41.369 - Caught SQL exception
-INFO - 2022-02-04T15:38:37.841 - Caught SQL exception
-INFO - 2022-02-04T15:40:31.339 - Caught SQL exception
-INFO - 2022-02-04T15:41:21.769 - Caught SQL exception
-INFO - 2022-02-04T15:44:37.295 - Caught SQL exception
-INFO - 2022-02-04T15:46:03.958 - Caught SQL exception
-INFO - 2022-02-04T15:47:40.131 - Caught SQL exception
-INFO - 2022-02-04T15:48:04.479 - Caught SQL exception
+WARN - 2022-02-10T17:13:46.982 - You do not have access to this feature
+INFO - 2022-02-10T17:14:22.270 - User obtained from database successfully
+WARN - 2022-02-10T17:16:03.665 - You do not have access to this feature
+WARN - 2022-02-10T17:16:14.396 - You do not have access to this feature
+WARN - 2022-02-10T17:16:16.357 - You do not have access to this feature
+WARN - 2022-02-10T17:16:21.058 - You must login to continue
+INFO - 2022-02-10T17:16:29.472 - User obtained from database successfully
+INFO - 2022-02-10T17:16:29.816 - Database was updated successfully
+WARN - 2022-02-10T17:17:03.345 - You must login to continue
+WARN - 2022-02-10T17:17:19.266 - You do not have access to this feature
+INFO - 2022-02-10T17:17:28.306 - Request obtained from database successfully
+WARN - 2022-02-10T17:17:59.909 - You do not have access to this feature
+INFO - 2022-02-10T17:18:08.860 - Requests obtained from database successfully
+WARN - 2022-02-10T17:18:46.015 - You must login to continue
+WARN - 2022-02-10T17:19:03.453 - You do not have access to this feature
+INFO - 2022-02-10T17:19:12.161 - Requests obtained from database successfully
+WARN - 2022-02-10T17:19:41.536 - You must login to continue
+WARN - 2022-02-10T17:19:58.358 - You do not have access to this feature
+INFO - 2022-02-10T17:20:07.506 - Users obtained from database successfully
+WARN - 2022-02-10T17:21:31.222 - You must login to continue
+WARN - 2022-02-10T17:21:45.083 - You do not have access to this feature
+INFO - 2022-02-10T17:21:53.112 - Request obtained from database successfully
+INFO - 2022-02-10T17:21:53.436 - User obtained from database successfully
+INFO - 2022-02-10T17:21:53.768 - Database was updated successfully

@@ -26,13 +26,18 @@ public class UserDaoImp implements UserDao{
             ps.setString(3, u.getFname());
             ps.setString(4, u.getLname());
             ps.setString(5, u.getEmail());
-            ps.setInt(6, u.getRoleId().ordinal() + 1);
+
+            ps.setInt(6, (u.getRoleId().ordinal())+1);
 
             int rowsAffected = ps.executeUpdate();
-            if(rowsAffected==1){return true;}
+            if(rowsAffected==1){
+                logger.info("Database was updated successfully");
+                return true;
+            }
         }
         catch (SQLException e){
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
 
         return false;
@@ -52,13 +57,18 @@ public class UserDaoImp implements UserDao{
             //ps.setInt(6, u.getRoleId().ordinal());
             ps.setInt(6, u.getId());
 
+
             int rowsAffected = ps.executeUpdate();
 
-            if (rowsAffected==1){return true;}
+            if (rowsAffected==1){
+                logger.info("Database was updated successfully");
+                return true;
+            }
 
         }
         catch (SQLException e){
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
 
         return false;
@@ -90,16 +100,17 @@ public class UserDaoImp implements UserDao{
 
                 //gives the ENUMS a  numeric value
                 UserRole[] roles = UserRole.values();
+                int roleOrdinal = rs.getInt(("roleid"))-1;
 
-                int roleOrdinal = rs.getInt(("roleid"));
                 u.setRoleId(roles[roleOrdinal]);
 
                 users.add(u);
             }
+            logger.info("Users obtained from database successfully");
         }
         catch (SQLException e) {
-            logger.info("Caught SQL exception");
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return users;
     }
@@ -132,14 +143,15 @@ public class UserDaoImp implements UserDao{
                 UserRole[] roles = UserRole.values();
 
                 int roleOrdinal = rs.getInt(("roleid"));
-                u.setRoleId(roles[roleOrdinal]);
+                u.setRoleId(roles[roleOrdinal-1]);
 
+                logger.info("User obtained from database successfully");
                 return u;
             }
         }
         catch (SQLException e) {
-            logger.info("Caught SQL exception");
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return null;
     }
@@ -173,13 +185,15 @@ public class UserDaoImp implements UserDao{
                 UserRole[] roles = UserRole.values();
 
                 int roleOrdinal = rs.getInt(("roleid"));
-                u.setRoleId(roles[roleOrdinal]);
+                u.setRoleId(roles[roleOrdinal-1]);
 
+                logger.info("User obtained from database successfully");
                 return u;
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return null;
     }
@@ -197,12 +211,14 @@ public class UserDaoImp implements UserDao{
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected == 0) {
+                logger.warn("Something went wrong - this request can't be removed");
                 return false;
             }
+            logger.info("Database was updated successfully");
             return true;
         } catch (SQLException e) {
-            logger.info("Caught SQL exception");
             e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
         }
         return false;
     }
