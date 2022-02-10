@@ -23,8 +23,9 @@ import io.javalin.http.UnauthorizedResponse;
             User u = new User();
             u = us.getUserByUsernameAndPassword(user, pass);
 
+
             //if no object was created then we know the credentials didn't match our DB
-            if (u.getUsername()==null){
+            if (u==null){
                 logger.warn("Invalid login credentials");
                 throw new UnauthorizedResponse("Invalid login credentials");
             } else {

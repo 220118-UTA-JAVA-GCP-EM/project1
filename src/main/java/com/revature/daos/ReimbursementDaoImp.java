@@ -10,12 +10,16 @@ import java.util.List;
 public class ReimbursementDaoImp implements ReimbursementDao {
     LoggingSingleton logger = LoggingSingleton.getLogger();
 
+    Date currentTime = new java.sql.Date(System.currentTimeMillis());
+
     @Override
     public boolean createRequest(Reimbursement r, User u){
         String sql = "insert into project1.reimbursements (amount, submitted, description, author, statusid, typeid) values (?,?,?,?,?,?)";
 
         try(Connection con = ConnectionUtil.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);){
+
+            r.setSubmitted(currentTime);
 
             ps.setDouble(1, r.getAmount());
             ps.setDate(2, r.getSubmitted());
@@ -82,6 +86,8 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 
         try(Connection con = ConnectionUtil.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);){
+
+            r.setResolved(currentTime);
 
             ps.setDate(1, r.getResolved());
             ps.setInt(2, u.getId());
@@ -167,4 +173,44 @@ public class ReimbursementDaoImp implements ReimbursementDao {
         return requests;
     }
 
+    @Override
+    public List<Reimbursement> getAllRequestsById(int id) {
+        String sql = "SELECT * FROM project1.reimbursements where author = ?";
+
+        try (Connection con = ConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);) {
+
+
+            List<Reimbursement> requests = new ArrayList<>();
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+
+            while (rs.next()) {
+                Reimbursement r = new Reimbursement();
+
+                r.setId(rs.getInt("id"));
+                r.setAmount(rs.getDouble("amount"));
+                r.setSubmitted(rs.getDate("submitted"));
+                r.setResolved(rs.getDate("resolved"));
+                r.setDescription(rs.getString("description"));
+                r.setAuthor(id);
+                r.setResolver(rs.getInt("resolver"));
+                r.setStatusId(rs.getInt("statusid"));
+                r.setTypeId(rs.getInt("typeid"));
+
+                requests.add(r);
+
+            }
+
+            logger.info("Requests obtained from database successfully");
+            return requests;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
+        }
+        return null;
+    }
 }

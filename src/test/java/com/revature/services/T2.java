@@ -51,7 +51,7 @@ public class T2 {
         r = new Reimbursement();
         u = new User();
 
-        when(rd.updateRequest(r,u)).thenReturn(true);
+        when(rd.updateRequest(r, u)).thenReturn(true);
 
         assertTrue(rs.updateRequest(r,u));
     }

@@ -26,7 +26,8 @@ public class UserDaoImp implements UserDao{
             ps.setString(3, u.getFname());
             ps.setString(4, u.getLname());
             ps.setString(5, u.getEmail());
-            ps.setInt(6, u.getRoleId().ordinal() );
+
+            ps.setInt(6, (u.getRoleId().ordinal())+1);
 
             int rowsAffected = ps.executeUpdate();
             if(rowsAffected==1){
@@ -99,8 +100,8 @@ public class UserDaoImp implements UserDao{
 
                 //gives the ENUMS a  numeric value
                 UserRole[] roles = UserRole.values();
+                int roleOrdinal = rs.getInt(("roleid"))-1;
 
-                int roleOrdinal = rs.getInt(("roleid"));
                 u.setRoleId(roles[roleOrdinal]);
 
                 users.add(u);
@@ -184,7 +185,7 @@ public class UserDaoImp implements UserDao{
                 UserRole[] roles = UserRole.values();
 
                 int roleOrdinal = rs.getInt(("roleid"));
-                u.setRoleId(roles[roleOrdinal]);
+                u.setRoleId(roles[roleOrdinal-1]);
 
                 logger.info("User obtained from database successfully");
                 return u;
