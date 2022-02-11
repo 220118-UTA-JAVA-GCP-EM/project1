@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 WARN - 2022-02-11T15:34:38.283 - Invalid login credentials
 INFO - 2022-02-11T15:36:40.350 - User obtained from database successfully
+=======
+INFO - 2022-02-11T17:53:30.834 - User obtained from database successfully
+INFO - 2022-02-11T17:55:00.391 - User obtained from database successfully
+INFO - 2022-02-11T17:57:25.040 - User registration started...
+INFO - 2022-02-11T18:01:12.677 - User registration started...
+>>>>>>> bc7ec36a011fd891172076a2254bdb8ac623b37e
