@@ -15,8 +15,9 @@ import io.javalin.http.UnauthorizedResponse;
 
         public void authenticateLogin(Context ctx){
             //interpret login request
-            String user = ctx.formParam("username");
-            String pass = ctx.formParam("password");
+            Login login = ctx.bodyAsClass(Login.class);
+            String user = login.username;
+            String pass = login.password;
 
             //fulfill login request
             UserService us = new UserService();
@@ -80,4 +81,9 @@ import io.javalin.http.UnauthorizedResponse;
             throw new UnauthorizedResponse("You must login to continue");
 
         }
+}
+
+class Login{
+        public String username;
+        public String password;
 }
