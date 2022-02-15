@@ -33,9 +33,18 @@ application{
     mainClass = 'com.revature.utils.JavalinApp'
 }
 
-/*
-test{
-    useJUnitPlatform()
+jar {
+    duplicatesStrategy = "include"
+
+    from {
+        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+    }
+
+    manifest {
+        attributes "Main-Class" : "com.revature.utils.JavalinApp"
+    }
 }
 
- */
+application {
+    mainClass = "com.revature.utils.JavalinApp"
+}
