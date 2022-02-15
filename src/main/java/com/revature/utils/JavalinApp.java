@@ -4,6 +4,7 @@ import com.revature.controllers.AuthController;
 import com.revature.controllers.ReimbursementController;
 import com.revature.controllers.UserController;
 import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
 
 public class JavalinApp {
 
@@ -15,12 +16,14 @@ public class JavalinApp {
 
 
     public static void main(String[] args) {
-        Javalin app = Javalin.create(config -> {config.enableCorsForAllOrigins();});
+        Javalin app = Javalin.create(config -> {config.enableCorsForAllOrigins();
+        config.addStaticFiles("/static", Location.CLASSPATH);});
+
 
         //Initial logins
         app.post("/user", uc::handleCreateUser);
         app.post("/login", auth::authenticateLogin);
-        //app.post("/logout",????)
+        //app.put("/logout")
 
 
         //employee stuff
