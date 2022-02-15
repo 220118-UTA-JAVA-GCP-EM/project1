@@ -1,0 +1,2 @@
+INFO - 2022-02-15T17:54:49.919 - User obtained from database successfully
+INFO - 2022-02-15T17:54:59.064 - User obtained from database successfully

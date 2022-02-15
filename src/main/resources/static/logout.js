@@ -1,9 +1,9 @@
 
+function logout(){
+    document.cookie = 'id=;';
+    document.cookie = 'Authorization=;';
+    console.log("check");
+}
 
-let logoutBtn = document.getElementById('logout').addEventListener('submit', () =>
-        fetch('http://localhost:8080/logout')
-            .then(res => {
-            document.cookie = 'id=;';
-            })
-        })
 
+let logoutBtn = document.getElementById('logout').addEventListener('click', logout);

@@ -19,6 +19,7 @@ loginButton.addEventListener('submit', function(event) {
     })
     .then(res => {
         document.cookie = `id=${res.headers.get("id")}`;
+        document.cookie = `Authorization=${res.headers.get("Authorization")}`;
         return res.text();
     })
     .then(data => {

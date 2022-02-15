@@ -1,7 +1,10 @@
 
 let newDiv = document.createElement("div");
-
+let apiView = "http://localhost:8080/employee/user/";
 let viewButton = document.getElementById("view-account");
+
+let newUserClass = document.getElementsByClassName("userInfo")[0];
+let newUser = document.getElementById("currUser");
 
 
 
@@ -21,26 +24,28 @@ function getCookie(cname) {
   return "";
 }
 
-viewButton.addEventListener('submit', function (event) {
+viewButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
-    const apiView = "http://localhost:8080/employee/user/";
-    const getUser = `${apiView}${userid}`;
+    let auth = getCookie("Authorization");
+    let getUser = `${apiView}${userid}`;
 
     //Display the url in the console.
     console.log(getUser);
-
+    
     //Fetch the url request.
-    fetch(getUser)
-        .then((res) => res.text()
+    fetch(getUser, {
+        headers: {
+          id: userid,
+          Authorization: auth
+        }
+    })
+        .then((res) => res.text())
         .then((data) => {
             console.log(data),
-            console.log(data),
-            //Add inner HTML to the element.
-            //newDiv.innerHTML += `<p>${data.species.name}</p> <img src="${data.sprites.front_default}"/>`
-
-            //newPokemonClass.append(newDiv);
+            console.log(data)
+            newDiv.innerHTML += `<p>${data}</p>`
+            newUserClass.append(newDiv);
             //console.log(newDiv);
-        }))
-
-});
+        });
+})
