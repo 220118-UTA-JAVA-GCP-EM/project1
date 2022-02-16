@@ -1,6 +1,6 @@
 
 let newDiv = document.createElement("div");
-let apiView = "http://localhost:8080/employee/user/";
+let apiView = "http://localhost:8080/employee/requests/";
 let viewButton = document.getElementById("view-account");
 
 let newUserClass = document.getElementsByClassName("userInfo")[0];
@@ -46,6 +46,6 @@ viewButton.addEventListener('click', function (event) {
             console.log(data)
             newDiv.innerHTML += `<p>${data}</p>`
             newUserClass.append(newDiv);
-            //console.log(newDiv);
+            console.log(newUser);
         });
 })

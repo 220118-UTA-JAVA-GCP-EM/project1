@@ -31,7 +31,7 @@ public class JavalinApp {
         app.get("/employee/user/{id}", uc::handleGetUserById);
         app.put("/employee/user/{id}", uc::handleUpdateUser);
         app.post("/employee/request", rc::handleCreateRequest);
-        app.get("/employee/request/{id}", rc::handleGetRequestById);
+        app.get("/employee/request/{id}", rc::handleGetRequestById); //does an employee need this?
         app.get("/employee/requests/{id}", rc::handleGetAllRequestsById);
 
         //manager stuff

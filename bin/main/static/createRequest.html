@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Register
+    </title>
+</head>
+
+<html>
+    <body>
+        <div class = "main">
+            <form id = "requestForm">
+                <label for = 'amount'> Amount: </label>
+                <input type = 'text' id = "amount" name = "amount" maxlength="50" required/>
+                <br>
+                <label for = 'description'> Description: </label>
+                <textarea id = "description" name = "description" rows="5" columns="50"></textarea>
+                <br>
+                <label for = 'typeid'> Type (0 - Lodging | 1 - Travel | 2 - Food | 3 - Other): </label>
+                <input type = 'text' id = "typeid" name = "typeid" maxlength="50" required/>
+                <br>
+                <a href="employeeHome.html">
+                    <input type = 'submit' id = "request" value = "Create Request"/>
+                </a>
+            </form>
+        </div>
+        <script src="createRequest.js"></script>
+    </body>
+</html>

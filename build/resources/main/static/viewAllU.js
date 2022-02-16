@@ -1,7 +1,7 @@
 
 let newDiv = document.createElement("div");
-let apiView = "http://localhost:8080/employee/user/";
-let viewButton = document.getElementById("view-account");
+let apiView = "http://localhost:8080/manager/users";
+let viewButton = document.getElementById("view-employees");
 
 let newUserClass = document.getElementsByClassName("userInfo")[0];
 let newUser = document.getElementById("currUser");
@@ -28,17 +28,15 @@ viewButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    let getUser = `${apiView}${userid}`;
+    //let getUser = `${apiView}${userid}`;
 
-    //Display the url in the console.
-    console.log(getUser);
-    
     //Fetch the url request.
-    fetch(getUser, {
-        headers: {
-          id: userid,
-          Authorization: auth
-        }
+    fetch(apiView, {
+      method: 'GET',
+      headers: {
+        id: userid,
+        Authorization: auth
+      }
     })
         .then((res) => res.text())
         .then((data) => {
