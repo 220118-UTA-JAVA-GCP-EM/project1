@@ -28,6 +28,7 @@ registerButton.addEventListener('submit', function(event) {
         console.log(username);
         console.log(password);
         console.log('Success', data);
+        document.location.href = "login.html";
     })
     .catch((error) => {
         console.error('Error:', error);

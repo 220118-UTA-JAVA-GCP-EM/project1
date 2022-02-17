@@ -1,6 +1,6 @@
 let newDiv2 = document.createElement("div");
-let apiViewReq = "http://localhost:8080/employee/requests/";
-let viewRequestsButton = document.getElementById("view-requests");
+let apiViewReq2 = "http://localhost:8080/manager/requests";
+let viewButton2 = document.getElementById("all-requests");
 
 let newUserClass2 = document.getElementsByClassName("userInfo")[0];
 let newUser2 = document.getElementById("currUser");
@@ -23,17 +23,14 @@ function getCookie(cname) {
   return "";
 }
 
-viewRequestsButton.addEventListener('click', function (event) {
+viewButton2.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    let getUser = `${apiViewReq}${userid}`;
+    //let getUser = `${apiView}${userid}`;
 
-    //Display the url in the console.
-    console.log(getUser);
-    
     //Fetch the url request.
-    fetch(getUser, {
+    fetch(apiViewReq2, {
       method: 'GET',
       headers: {
         id: userid,
@@ -45,7 +42,7 @@ viewRequestsButton.addEventListener('click', function (event) {
             console.log(data),
             console.log(data)
             newDiv2.innerHTML += `<p>${data}</p>`
-            newUserClass.append(newDiv2);
-            console.log(newUser2);
+            newUserClass2.append(newDiv2);
+            //console.log(newDiv);
         });
 })

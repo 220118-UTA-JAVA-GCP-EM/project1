@@ -24,7 +24,7 @@ registerButton.addEventListener('submit', function(event) {
     let amount = document.getElementById("amount").value;
     let description = document.getElementById("description").value;
     let typeId = document.getElementById("typeid").value;
-    //event.preventDefault();
+    event.preventDefault();
 
     let author = getCookie("id");
     let statusId = 1;
@@ -48,6 +48,7 @@ registerButton.addEventListener('submit', function(event) {
         console.log(description);
         console.log(typeId);
         console.log('Success', data);
+        document.location.href = "employeeHome.html";
     })
     .catch((error) => {
         console.error('Error:', error);

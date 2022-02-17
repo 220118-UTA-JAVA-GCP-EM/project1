@@ -40,7 +40,7 @@ public class JavalinApp {
         app.get("/manager/user/{id}", uc::handleGetUserById);
         app.put("/manager/request/{id}", rc::handleUpdateRequest);
         app.get("/manager/requests", rc::handleGetAllRequests);
-        app.get("/manager/request/{id}", rc::handleGetRequestById);
+        app.get("/manager/request/{id}", rc::handleGetRequestById); //same here
         app.get("/manager/requests/{id}", rc::handleGetAllRequestsById);
 
         //debug

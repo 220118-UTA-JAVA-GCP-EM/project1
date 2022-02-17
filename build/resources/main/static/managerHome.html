@@ -10,27 +10,29 @@
         <div class = "navbar">
             <ul class="list">
                 <li class="item">
-                    <a class="link" href="home.html">
-                        Home
-                    </a>
-                </li>
-                <li class="item">
                     <a class="link">
+                        <!--working on. should provide pending request's id-->
                         Resolve Pending Requests
                     </a>
                 </li>
                 <li class="item">
                     <a class="link">
                         View All Requests
+                        <!--works-->
+                        <input type="submit" value="all-requests" id="all-requests" />
                     </a>
                 </li>
                 <li class="item">
                     <a class="link">
-                        View Employees' Request
+                        View Employee's Request
+                        <!--workin on, need to grab id number of employee-->
+                        <input type = 'text' id = "user-id" maxlength="50" required/>
+                        <input type="submit" value="employee-requests" id="employee-requests" />
                     </a>
                 </li>
                 <li class="item">
                     <a class="link">
+                        View All Employees
                         <!--works-->
                         <input type="submit" value="view-employees" id="view-employees" />
                     </a>
@@ -50,5 +52,7 @@
             
         </div>
         <script src="viewAllU.js"></script>
+        <script src="viewAllR.js"></script>
+        <script src="viewRM.js"></script>
     </body>
 </html>

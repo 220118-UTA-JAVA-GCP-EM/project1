@@ -1,1 +1,1 @@
-INFO - 2022-02-16T17:54:32.606 - Users obtained from database successfully
+INFO - 2022-02-17T17:48:28.169 - Requests obtained from database successfully

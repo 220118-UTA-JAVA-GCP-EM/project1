@@ -1,9 +1,9 @@
-let newDiv2 = document.createElement("div");
-let apiViewReq = "http://localhost:8080/employee/requests/";
-let viewRequestsButton = document.getElementById("view-requests");
+let newDiv3 = document.createElement("div");
+let apiViewReq3 = "http://localhost:8080/manager/requests/";
+let viewRequestsButton3 = document.getElementById("employee-requests");
 
-let newUserClass2 = document.getElementsByClassName("userInfo")[0];
-let newUser2 = document.getElementById("currUser");
+let newUserClass3 = document.getElementsByClassName("userInfo")[0];
+let newUser3 = document.getElementById("currUser");
 
 
 
@@ -23,11 +23,12 @@ function getCookie(cname) {
   return "";
 }
 
-viewRequestsButton.addEventListener('click', function (event) {
+viewRequestsButton3.addEventListener('click', function (event) {
 
-    let userid = getCookie("id");
+    let userid = document.getElementById("user-id").value;
+    console.log(userid);
     let auth = getCookie("Authorization");
-    let getUser = `${apiViewReq}${userid}`;
+    let getUser = `${apiViewReq3}${userid}`;
 
     //Display the url in the console.
     console.log(getUser);
@@ -44,8 +45,8 @@ viewRequestsButton.addEventListener('click', function (event) {
         .then((data) => {
             console.log(data),
             console.log(data)
-            newDiv2.innerHTML += `<p>${data}</p>`
-            newUserClass.append(newDiv2);
-            console.log(newUser2);
+            newDiv3.innerHTML += `<p>${data}</p>`
+            newUserClass3.append(newDiv3);
+            console.log(newUser3);
         });
 })
