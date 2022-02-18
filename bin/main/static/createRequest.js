@@ -1,5 +1,5 @@
-const apiRequest = 'http://localhost:8080/employee/request';
-let registerButton = document.getElementById("requestForm");
+const apiCreateRequest = 'http://localhost:8080/employee/request';
+let createRequestButton = document.getElementById("requestForm");
 
 
 function getCookie(cname) {
@@ -19,11 +19,11 @@ function getCookie(cname) {
   }
 
 
-registerButton.addEventListener('submit', function(event) {
+createRequestButton.addEventListener('submit', function(event) {
 
     let amount = document.getElementById("amount").value;
     let description = document.getElementById("description").value;
-    let typeId = document.getElementById("typeid").value;
+    let typeId = document.getElementById("type").value;
     event.preventDefault();
 
     let author = getCookie("id");
@@ -34,7 +34,7 @@ registerButton.addEventListener('submit', function(event) {
         amount, description, author, statusId, typeId,
     }
 
-    fetch(apiRequest, {
+    fetch(apiCreateRequest, {
         method: 'POST',
         body: JSON.stringify(request),
         headers: {

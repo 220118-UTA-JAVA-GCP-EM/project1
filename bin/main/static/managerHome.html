@@ -11,10 +11,12 @@
     <body class="d-flex h-100 text-white bg-dark">
     <div>
         <nav class = "nav nav-masthead justify-content-center p-5 float-md-end">
-            <button id="resolve-requests" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">Resolve Requests</button>
+            <button id="resolve-requests" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">Resolve Request</button>
+            <input type = 'text' id = "request-id" maxlength="50" value="<= place request id here"/>
+            <input type = 'text' id = "resolve" maxlength="50" value="<= place approve/deny here"/>
             <button id="all-requests" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">View All Requests</button>
             <button id="employee-requests" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">View Employee's Requests</button>
-            <input type = 'text' id = "user-id" maxlength="50" value="place ids here"/>
+            <input type = 'text' id = "user-id" maxlength="50" value="<= place employee id here"/>
             <button id="view-employees" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">View All Employees</button>
             <a href="logout.html">
                 <button id="logout" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">Log Out</button>
@@ -61,5 +63,6 @@
         <script src="viewAllU.js"></script>
         <script src="viewAllR.js"></script>
         <script src="viewRM.js"></script>
+        <script src="resolveRequest.js"></script>
     </body>
 </html>

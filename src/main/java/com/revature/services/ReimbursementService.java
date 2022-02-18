@@ -28,5 +28,11 @@ public class ReimbursementService {
     public List<Reimbursement> getAllRequestsById(int id){
         return rd.getAllRequestsById(id);
    }
+    public List<Reimbursement> getPendingRequestsById(int id){
+        return rd.getPendingRequestsById(id);
+    }
+    public List<Reimbursement> getResolvedRequestsById(int id){
+        return rd.getResolvedRequestsById(id);
+    }
 
 }

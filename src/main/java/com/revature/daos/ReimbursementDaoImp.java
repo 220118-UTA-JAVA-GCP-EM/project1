@@ -26,7 +26,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
             ps.setString(3, r.getDescription());
             ps.setInt(4, u.getId());
             ps.setInt(5, r.getStatusId());
-            ps.setInt(6, r.getTypeId());
+            ps.setInt(6, r.getTypeId()+1);
 
 
             int rowsAffected = ps.executeUpdate();
@@ -201,6 +201,91 @@ public class ReimbursementDaoImp implements ReimbursementDao {
                 r.setTypeId(rs.getInt("typeid"));
 
                 requests.add(r);
+
+            }
+
+            logger.info("Requests obtained from database successfully");
+            return requests;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
+        }
+        return null;
+    }
+
+    @Override
+    public List<Reimbursement> getPendingRequestsById(int id) {
+        String sql = "SELECT * FROM project1.reimbursements where author = ?";
+
+        try (Connection con = ConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);) {
+
+
+            List<Reimbursement> requests = new ArrayList<>();
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+
+            while (rs.next()) {
+                Reimbursement r = new Reimbursement();
+
+                r.setId(rs.getInt("id"));
+                r.setAmount(rs.getDouble("amount"));
+                r.setSubmitted(rs.getDate("submitted"));
+                r.setResolved(rs.getDate("resolved"));
+                r.setDescription(rs.getString("description"));
+                r.setAuthor(id);
+                r.setResolver(rs.getInt("resolver"));
+                r.setStatusId(rs.getInt("statusid"));
+                r.setTypeId(rs.getInt("typeid"));
+
+                if (r.getStatusId() == (ReimbursementStatus.PENDING.ordinal()+1)) {
+                    requests.add(r);
+                }
+            }
+
+            logger.info("Requests obtained from database successfully");
+            return requests;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.warn("Something went wrong - SQLException");
+        }
+        return null;
+    }
+
+    @Override
+    public List<Reimbursement> getResolvedRequestsById(int id) {
+        String sql = "SELECT * FROM project1.reimbursements where author = ?";
+
+        try (Connection con = ConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);) {
+
+
+            List<Reimbursement> requests = new ArrayList<>();
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+
+            while (rs.next()) {
+                Reimbursement r = new Reimbursement();
+
+                r.setId(rs.getInt("id"));
+                r.setAmount(rs.getDouble("amount"));
+                r.setSubmitted(rs.getDate("submitted"));
+                r.setResolved(rs.getDate("resolved"));
+                r.setDescription(rs.getString("description"));
+                r.setAuthor(id);
+                r.setResolver(rs.getInt("resolver"));
+                r.setStatusId(rs.getInt("statusid"));
+                r.setTypeId(rs.getInt("typeid"));
+
+                if (r.getStatusId() != (ReimbursementStatus.PENDING.ordinal()+1)) {
+                    requests.add(r);
+                }
 
             }
 

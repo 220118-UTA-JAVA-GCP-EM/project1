@@ -8,7 +8,7 @@ registerButton.addEventListener('submit', function(event) {
     let email = document.getElementById("email").value;
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
-    let roleId = document.getElementById("role").value;
+    let roleId = document.getElementById("roles").value;
 
     event.preventDefault();
 

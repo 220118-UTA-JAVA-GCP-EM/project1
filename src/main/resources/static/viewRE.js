@@ -1,10 +1,8 @@
-let newDiv2 = document.createElement("div");
-let apiViewReq = "http://localhost:8080/employee/requests/";
-let viewRequestsButton = document.getElementById("view-requests");
+let pendingRequestsDiv = document.createElement("div");
+let apiPendingRequests = "http://localhost:8080/employee/requests/pending/";
+let pendingRequestsButton = document.getElementById("view-pending-requests");
 
-let newUserClass2 = document.getElementsByClassName("userInfo")[0];
-let newUser2 = document.getElementById("currUser");
-
+let pendingRequestsClass = document.getElementsByClassName("pendingRequests")[0];
 
 
 function getCookie(cname) {
@@ -23,29 +21,70 @@ function getCookie(cname) {
   return "";
 }
 
-viewRequestsButton.addEventListener('click', function (event) {
+pendingRequestsButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    let getUser = `${apiViewReq}${userid}`;
+    let getPendingRequests = `${apiPendingRequests}${userid}`;
 
     //Display the url in the console.
-    console.log(getUser);
+    console.log(getPendingRequests);
     
     //Fetch the url request.
-    fetch(getUser, {
+    fetch(getPendingRequests, {
       method: 'GET',
       headers: {
         id: userid,
         Authorization: auth
       }
     })
-        .then((res) => res.text())
+        .then((res) => res.json())
         .then((data) => {
-            console.log(data),
             console.log(data)
-            newDiv2.innerHTML += `<p>${data}</p>`
-            newUserClass.append(newDiv2);
-            console.log(newUser2);
+            console.log(data)
+            pendingRequestsDiv.innerHTML += `<p style="font-size: 30px">Pending Requests</p>`
+            pendingRequestsClass.append(pendingRequestsDiv);
+            for(let i = 0; i < data.length; i++){
+            pendingRequestsDiv.innerHTML += `<style>
+            table, td, th {
+              border: 1px solid white;
+            }
+            
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td {
+              height: 30px;
+              text-align: center;
+            }
+            </style>
+            <table>
+            <tr>
+              <th>ID #</th>
+              <th>Amount $</th>
+              <th>Submitted</th>
+              <th>Resolved</th>
+              <th>Description</th>
+              <th>Author</th>
+              <th>Resolver</th>
+              <th>Type</th>
+            </tr>
+            <tr>
+              <td>${data[i].id}</td>
+              <td>${data[i].amount}</td>
+              <td>${data[i].submitted}</td>
+              <td>${data[i].resolved}</td>
+              <td>${data[i].description}</td>
+              <td>${data[i].author}</td>
+              <td>${data[i].resolver}</td>
+              <td>${data[i].typeId}</td>
+            </tr>
+            <br>
+          </table>`
+            }
+            pendingRequestsClass.append(pendingRequestsDiv);
+            console.log(pendingRequestsClass);
         });
 })

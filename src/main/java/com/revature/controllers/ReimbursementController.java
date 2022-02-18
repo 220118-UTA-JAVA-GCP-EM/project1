@@ -25,6 +25,22 @@ public class ReimbursementController {
         ctx.json(r);
     }
 
+    public void handleGetPendingRequestsById(Context ctx){
+        String idParam = ctx.pathParam("id");
+        int id = Integer.parseInt(idParam);
+
+        List<Reimbursement> r = rs.getPendingRequestsById(id);
+        ctx.json(r);
+    }
+
+    public void handleGetResolvedRequestsById(Context ctx){
+        String idParam = ctx.pathParam("id");
+        int id = Integer.parseInt(idParam);
+
+        List<Reimbursement> r = rs.getResolvedRequestsById(id);
+        ctx.json(r);
+    }
+
     public void handleCreateRequest(Context ctx){
         Reimbursement r = ctx.bodyAsClass(Reimbursement.class);
         UserService us = new UserService();

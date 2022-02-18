@@ -1,8 +1,11 @@
-let apiView = "http://localhost:8080/employee/user/";
-let updateButton = document.getElementById("update");
+let apiUpdateAccount = "http://localhost:8080/employee/user/";
+let updateAccountButton = document.getElementById("update");
+let fname = "";
+let lname = "";
+let email = "";
+let username = "";
+let password = "";
 
-//let newUserClass = document.getElementsByClassName("userInfo")[0];
-//let newUser = document.getElementById("currUser");
 
 function getCookie(cname) {
   let name = cname + "=";
@@ -20,36 +23,64 @@ function getCookie(cname) {
   return "";
 }
 
-//try this later, but maybe fill in existing fields? but how???
-//document.getElementById('first').setAttribute('value', fname);
+function getInfo(){
+  let userid = getCookie("id");
+  let auth = getCookie("Authorization");
+  let getUser = `${apiUpdateAccount}${userid}`;
 
-updateButton.addEventListener('click', function (event) {
+  fetch(getUser, {
+    method: 'GET',
+    headers: {
+      id: userid,
+      Authorization: auth
+    }
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      fname = data.fname;
+      document.getElementById('first').setAttribute('value', fname);
+      lname = data.lname;
+      document.getElementById('last').setAttribute('value', lname);
+      email = data.email;
+      document.getElementById('email').setAttribute('value', email);
+      username = data.username;
+      document.getElementById('username').setAttribute('value', username);
+      //maybe have them fillin the whole password again?
+      password = data.password;
+      document.getElementById('password').setAttribute('value', password);
+
+    });
+}
+
+getInfo();
+
+
+
+updateAccountButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    let getUser = `${apiView}${userid}`;
-    let fname = document.getElementById("first").value;
-    let lname = document.getElementById("last").value;
-    let email = document.getElementById("email").value;
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+    let getUser2 = `${apiUpdateAccount}${userid}`;
+    fname = document.getElementById("first").value;
+    lname = document.getElementById("last").value;
+    email = document.getElementById("email").value;
+    username = document.getElementById("username").value;
+    password = document.getElementById("password").value;
     event.preventDefault();
 
-    let register = {
+    let update = {
         fname, lname, email, username, password
       }
 
-    //Display the url in the console.
-    console.log(getUser);
     
     //Fetch the url request.
-    fetch(getUser, {
+    fetch(getUser2, {
         method: 'PUT',
         headers: {
           id: userid,
           Authorization: auth
         },
-        body: JSON.stringify(register)
+        body: JSON.stringify(update)
     })
         .then((res) => res.text())
         .then((data) => {

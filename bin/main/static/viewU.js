@@ -1,10 +1,10 @@
 
-let newDiv = document.createElement("div");
-let apiView = "http://localhost:8080/employee/user/";
-let viewButton = document.getElementById("view-account");
+let viewAccountDiv = document.createElement("div");
+let apiViewAccount = "http://localhost:8080/employee/user/";
+let viewAccountButton = document.getElementById("view-account");
 
-let newUserClass = document.getElementsByClassName("userInfo")[0];
-let newUser = document.getElementById("currUser");
+let viewUserClass = document.getElementsByClassName("userInfo")[0];
+let viewUser = document.getElementById("currUser");
 
 
 
@@ -24,11 +24,11 @@ function getCookie(cname) {
   return "";
 }
 
-viewButton.addEventListener('click', function (event) {
+viewAccountButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    let getUser = `${apiView}${userid}`;
+    let getUser = `${apiViewAccount}${userid}`;
 
     //Display the url in the console.
     console.log(getUser);
@@ -40,12 +40,15 @@ viewButton.addEventListener('click', function (event) {
           Authorization: auth
         }
     })
-        .then((res) => res.text())
+        .then((res) => res.json())
         .then((data) => {
-            console.log(data),
-            console.log(data)
-            newDiv.innerHTML += `<p>${data}</p>`
-            newUserClass.append(newDiv);
-            console.log(newUser);
+            viewAccountDiv.innerHTML += `<h1>Account Information</h1>
+            <p>First Name: ${data.fname}</p>
+            <p>Last Name: ${data.lname}</p>
+            <p>E-mail: ${data.email}</p>
+            <p>Username: ${data.username}</p>
+            <p>Password: ${data.password}</p>`
+            viewUserClass.append(viewAccountDiv);
+            console.log(viewUserClass);
         });
 })
