@@ -1,8 +1,8 @@
-let pendingRequestsDiv = document.createElement("div");
-let apiPendingRequests = "http://localhost:8080/employee/requests/pending/";
-let pendingRequestsButton = document.getElementById("view-pending-requests");
+let resolvedRequestsDiv = document.createElement("div");
+let apiResolvedRequests = "http://localhost:8080/manager/requests/resolved";
+let resolvedRequestsButton = document.getElementById("all-resolved-requests");
 
-let pendingRequestsClass = document.getElementsByClassName("pendingRequests")[0];
+let resolvedRequestsClass = document.getElementsByClassName("allResolvedRequests")[0];
 
 
 function getCookie(cname) {
@@ -21,17 +21,17 @@ function getCookie(cname) {
   return "";
 }
 
-pendingRequestsButton.addEventListener('click', function (event) {
+resolvedRequestsButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    let getPendingRequests = `${apiPendingRequests}${userid}`;
+    let getResolvedRequests = `${apiResolvedRequests}`;
 
     //Display the url in the console.
-    console.log(getPendingRequests);
+    console.log(getResolvedRequests);
     
     //Fetch the url request.
-    fetch(getPendingRequests, {
+    fetch(getResolvedRequests, {
       method: 'GET',
       headers: {
         id: userid,
@@ -42,10 +42,10 @@ pendingRequestsButton.addEventListener('click', function (event) {
         .then((data) => {
             console.log(data)
             console.log(data)
-            pendingRequestsDiv.innerHTML += `<p style="font-size: 30px">Pending Requests</p>`
-            pendingRequestsClass.append(pendingRequestsDiv);
+            resolvedRequestsDiv.innerHTML += `<p style="font-size: 30px">All Resolved Requests</p>`
+            resolvedRequestsClass.append(resolvedRequestsDiv);
             for(let i = 0; i < data.length; i++){
-            pendingRequestsDiv.innerHTML += `<style>
+            resolvedRequestsDiv.innerHTML += `<style>
             table, td, th {
               border: 1px solid white;
             }
@@ -69,6 +69,7 @@ pendingRequestsButton.addEventListener('click', function (event) {
               <th>Description</th>
               <th>Author</th>
               <th>Resolver</th>
+              <th>Status</th>
               <th>Type</th>
             </tr>
             <tr>
@@ -79,12 +80,13 @@ pendingRequestsButton.addEventListener('click', function (event) {
               <td>${data[i].description}</td>
               <td>${data[i].author}</td>
               <td>${data[i].resolver}</td>
+              <td>${data[i].statusId}</td>
               <td>${data[i].typeId}</td>
             </tr>
             <br>
           </table>`
             }
-            pendingRequestsClass.append(pendingRequestsDiv);
-            console.log(pendingRequestsClass);
+            resolvedRequestsClass.append(resolvedRequestsDiv);
+            console.log(resolvedRequestsClass);
         });
 })

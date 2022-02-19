@@ -1,8 +1,8 @@
 let pendingRequestsDiv = document.createElement("div");
-let apiPendingRequests = "http://localhost:8080/employee/requests/pending/";
-let pendingRequestsButton = document.getElementById("view-pending-requests");
+let apiPendingRequests = "http://localhost:8080/manager/requests/pending";
+let pendingRequestsButton = document.getElementById("all-pending-requests");
 
-let pendingRequestsClass = document.getElementsByClassName("pendingRequests")[0];
+let pendingRequestsClass = document.getElementsByClassName("allPendingRequests")[0];
 
 
 function getCookie(cname) {
@@ -25,7 +25,7 @@ pendingRequestsButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    let getPendingRequests = `${apiPendingRequests}${userid}`;
+    let getPendingRequests = `${apiPendingRequests}`;
 
     //Display the url in the console.
     console.log(getPendingRequests);
@@ -42,7 +42,7 @@ pendingRequestsButton.addEventListener('click', function (event) {
         .then((data) => {
             console.log(data)
             console.log(data)
-            pendingRequestsDiv.innerHTML += `<p style="font-size: 30px">Pending Requests</p>`
+            pendingRequestsDiv.innerHTML += `<p style="font-size: 30px">All Pending Requests</p>`
             pendingRequestsClass.append(pendingRequestsDiv);
             for(let i = 0; i < data.length; i++){
             pendingRequestsDiv.innerHTML += `<style>
@@ -69,6 +69,7 @@ pendingRequestsButton.addEventListener('click', function (event) {
               <th>Description</th>
               <th>Author</th>
               <th>Resolver</th>
+              <th>Status</th>
               <th>Type</th>
             </tr>
             <tr>
@@ -79,6 +80,7 @@ pendingRequestsButton.addEventListener('click', function (event) {
               <td>${data[i].description}</td>
               <td>${data[i].author}</td>
               <td>${data[i].resolver}</td>
+              <td>${data[i].statusId}</td>
               <td>${data[i].typeId}</td>
             </tr>
             <br>

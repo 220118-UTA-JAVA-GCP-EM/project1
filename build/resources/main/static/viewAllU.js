@@ -28,7 +28,6 @@ viewButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    //let getUser = `${apiView}${userid}`;
 
     //Fetch the url request.
     fetch(apiView, {
@@ -38,12 +37,46 @@ viewButton.addEventListener('click', function (event) {
         Authorization: auth
       }
     })
-        .then((res) => res.text())
+        .then((res) => res.json())
         .then((data) => {
             console.log(data),
             console.log(data)
-            newDiv.innerHTML += `<p>${data}</p>`
+            newDiv.innerHTML += `<p style="font-size: 30px">All Employees</p>`
             newUserClass.append(newDiv);
-            //console.log(newDiv);
+            for(let i = 0; i < data.length; i++){
+            newDiv.innerHTML += `<style>
+            table, td, th {
+              border: 1px solid white;
+            }
+            
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td {
+              height: 30px;
+            }
+            </style>
+            <table>
+            <tr>
+              <th>ID #</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>E-Mail</th>
+              <th>Username</th>
+            </tr>
+            <tr>
+              <td>${data[i].id}</td>
+              <td>${data[i].fname}</td>
+              <td>${data[i].lname}</td>
+              <td>${data[i].email}</td>
+              <td>${data[i].username}</td>
+            </tr>
+            <br>
+          </table>`
+          }
+            newUserClass.append(newDiv);
+            console.log(newUser);
         });
 })

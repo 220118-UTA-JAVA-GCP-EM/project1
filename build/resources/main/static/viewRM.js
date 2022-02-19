@@ -2,7 +2,7 @@ let newDiv3 = document.createElement("div");
 let apiViewReq3 = "http://localhost:8080/manager/requests/";
 let viewRequestsButton3 = document.getElementById("employee-requests");
 
-let newUserClass3 = document.getElementsByClassName("userInfo")[0];
+let newUserClass3 = document.getElementsByClassName("Info")[0];
 let newUser3 = document.getElementById("currUser");
 
 
@@ -27,6 +27,7 @@ viewRequestsButton3.addEventListener('click', function (event) {
 
     let userid = document.getElementById("user-id").value;
     console.log(userid);
+    let id = getCookie("id");
     let auth = getCookie("Authorization");
     let getUser = `${apiViewReq3}${userid}`;
 
@@ -37,15 +38,58 @@ viewRequestsButton3.addEventListener('click', function (event) {
     fetch(getUser, {
       method: 'GET',
       headers: {
-        id: userid,
+        id: id,
         Authorization: auth
       }
     })
-        .then((res) => res.text())
+        .then((res) => res.json())
         .then((data) => {
-            console.log(data),
             console.log(data)
-            newDiv3.innerHTML += `<p>${data}</p>`
+            console.log(data)
+            newDiv3.innerHTML += `<p style="font-size: 30px">Employee #${data[0].author}'s Requests</p>`
+            newUserClass3.append(newDiv3);
+            for(let i = 0; i < data.length; i++){
+            newDiv3.innerHTML += `<style>
+            table, td, th {
+              border: 1px solid white;
+            }
+            
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td {
+              height: 30px;
+              text-align: center;
+            }
+            </style>
+            <table>
+            <tr>
+              <th>ID #</th>
+              <th>Amount $</th>
+              <th>Submitted</th>
+              <th>Resolved</th>
+              <th>Description</th>
+              <th>Author</th>
+              <th>Resolver</th>
+              <th>Status</th>
+              <th>Type</th>
+            </tr>
+            <tr>
+              <td>${data[i].id}</td>
+              <td>${data[i].amount}</td>
+              <td>${data[i].submitted}</td>
+              <td>${data[i].resolved}</td>
+              <td>${data[i].description}</td>
+              <td>${data[i].author}</td>
+              <td>${data[i].resolver}</td>
+              <td>${data[i].statusId}</td>
+              <td>${data[i].typeId}</td>
+            </tr>
+            <br>
+          </table>`
+          }
             newUserClass3.append(newDiv3);
             console.log(newUser3);
         });

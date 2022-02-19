@@ -1,9 +1,9 @@
-let newDiv2 = document.createElement("div");
-let apiViewReq2 = "http://localhost:8080/manager/requests";
-let viewButton2 = document.getElementById("all-requests");
+let viewAllRequestsDiv = document.createElement("div");
+let apiViewAllRequests = "http://localhost:8080/manager/requests";
+let viewAllRequestsButton = document.getElementById("all-requests");
 
-let newUserClass2 = document.getElementsByClassName("userInfo")[0];
-let newUser2 = document.getElementById("currUser");
+let viewAllRequestsClass = document.getElementsByClassName("userInfo")[0];
+//let newUser2 = document.getElementById("currUser");
 
 
 
@@ -23,14 +23,14 @@ function getCookie(cname) {
   return "";
 }
 
-viewButton2.addEventListener('click', function (event) {
+viewAllRequestsButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
     //let getUser = `${apiView}${userid}`;
 
     //Fetch the url request.
-    fetch(apiViewReq2, {
+    fetch(apiViewAllRequests, {
       method: 'GET',
       headers: {
         id: userid,
@@ -41,8 +41,8 @@ viewButton2.addEventListener('click', function (event) {
         .then((data) => {
             console.log(data),
             console.log(data)
-            newDiv2.innerHTML += `<p>${data}</p>`
-            newUserClass2.append(newDiv2);
+            viewAllRequestsDiv.innerHTML += `<p>${data}</p>`
+            viewAllRequestsClass.append(viewAllRequestsDiv);
             //console.log(newDiv);
         });
 })

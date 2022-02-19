@@ -1,5 +1,5 @@
-const apiRequest = 'http://localhost:8080/manager/request/';
-let resolveButton = document.getElementById("resolve-requests");
+const apiResolveRequest = 'http://localhost:8080/manager/request/';
+let resolveRequestButton = document.getElementById("resolve-requests");
 
 
 function getCookie(cname) {
@@ -19,13 +19,13 @@ function getCookie(cname) {
   }
 
 
-resolveButton.addEventListener('click', function(event) {
+resolveRequestButton.addEventListener('click', function(event) {
 
     let resolver = getCookie("id");
     let requestId = document.getElementById("request-id").value;
-    let statusId = document.getElementById("resolve").value;
+    let statusId = document.getElementById("status").value;
     let auth = getCookie("Authorization");
-    let getUser = `${apiRequest}${requestId}`;
+    let getUser = `${apiResolveRequest}${requestId}`;
     event.preventDefault();
 
     console.log(resolver);
@@ -48,7 +48,7 @@ resolveButton.addEventListener('click', function(event) {
     .then(data => {
       console.log(data)
       console.log("Updated.")
-        //document.location.href = "managerHome.html";
+      document.location.href = "managerHome.html";
     })
     .catch((error) => {
         console.error('Error:', error);

@@ -1,3 +1,5 @@
-INFO - 2022-02-18T17:15:40.860 - User obtained from database successfully
-INFO - 2022-02-18T17:15:45.526 - Requests obtained from database successfully
-INFO - 2022-02-18T17:15:50.353 - Requests obtained from database successfully
+INFO - 2022-02-19T18:48:42.540 - User obtained from database successfully
+INFO - 2022-02-19T18:48:47.610 - Requests obtained from database successfully
+INFO - 2022-02-19T18:49:02.844 - Requests obtained from database successfully
+INFO - 2022-02-19T18:49:04.391 - Requests obtained from database successfully
+INFO - 2022-02-19T18:49:12.159 - Users obtained from database successfully

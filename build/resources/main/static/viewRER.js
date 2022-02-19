@@ -63,7 +63,7 @@ resolvedRequestsButton.addEventListener('click', function (event) {
             <table>
             <tr>
               <th>ID #</th>
-              <th>Amount</th>
+              <th>Amount $</th>
               <th>Submitted</th>
               <th>Resolved</th>
               <th>Description</th>
