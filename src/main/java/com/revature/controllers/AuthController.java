@@ -4,7 +4,6 @@ import com.revature.models.LoggingSingleton;
 import com.revature.models.User;
 import com.revature.models.UserRole;
 import com.revature.services.UserService;
-import com.revature.utils.LoggingUtil;
 import io.javalin.http.Context;
 import io.javalin.http.ForbiddenResponse;
 import io.javalin.http.UnauthorizedResponse;
@@ -15,8 +14,10 @@ import io.javalin.http.UnauthorizedResponse;
 
         public void authenticateLogin(Context ctx){
             //interpret login request
-            String user = ctx.formParam("username");
-            String pass = ctx.formParam("password");
+            Login login = ctx.bodyAsClass(Login.class);
+            String user = login.username;
+            String pass = login.password;
+            int id = login.id;
 
             //fulfill login request
             UserService us = new UserService();
@@ -44,6 +45,8 @@ import io.javalin.http.UnauthorizedResponse;
                     ctx.header("Authorization", authToken);
                     ctx.status(200);
                 }
+                String idString = (String.valueOf(u.getId()));
+                ctx.header("id", idString);
 
                 }
             }
@@ -80,4 +83,10 @@ import io.javalin.http.UnauthorizedResponse;
             throw new UnauthorizedResponse("You must login to continue");
 
         }
+}
+
+class Login{
+        public String username;
+        public String password;
+        public int id;
 }

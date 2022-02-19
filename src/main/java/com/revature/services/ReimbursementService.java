@@ -25,8 +25,20 @@ public class ReimbursementService {
     public List<Reimbursement> getAllRequests(){
         return rd.getAllRequests();
     }
+    public List<Reimbursement> getAllPendingRequests(){
+        return rd.getAllPendingRequests();
+    }
+    public List<Reimbursement> getAllResolvedRequests(){
+        return rd.getAllResolvedRequests();
+    }
     public List<Reimbursement> getAllRequestsById(int id){
         return rd.getAllRequestsById(id);
    }
+    public List<Reimbursement> getPendingRequestsById(int id){
+        return rd.getPendingRequestsById(id);
+    }
+    public List<Reimbursement> getResolvedRequestsById(int id){
+        return rd.getResolvedRequestsById(id);
+    }
 
 }

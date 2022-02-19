@@ -103,8 +103,9 @@ public class UserDaoImp implements UserDao{
                 int roleOrdinal = rs.getInt(("roleid"))-1;
 
                 u.setRoleId(roles[roleOrdinal]);
-
-                users.add(u);
+                if (u.getRoleId() == UserRole.EMPLOYEE) {
+                    users.add(u);
+                }
             }
             logger.info("Users obtained from database successfully");
         }

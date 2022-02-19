@@ -11,6 +11,10 @@ public interface ReimbursementDao {
     public boolean updateRequest(Reimbursement r, User u);
     public boolean deleteRequest(int id);
     public List<Reimbursement> getAllRequests();
+    public List<Reimbursement> getAllPendingRequests();
+    public List<Reimbursement> getAllResolvedRequests();
     public List<Reimbursement> getAllRequestsById(int id);
+    public List<Reimbursement> getPendingRequestsById(int id);
+    public List<Reimbursement> getResolvedRequestsById(int id);
 
 }
