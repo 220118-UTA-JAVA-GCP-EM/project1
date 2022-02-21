@@ -3,7 +3,6 @@ let apiViewAllRequests = "http://localhost:8080/manager/requests";
 let viewAllRequestsButton = document.getElementById("all-requests");
 
 let viewAllRequestsClass = document.getElementsByClassName("userInfo")[0];
-//let newUser2 = document.getElementById("currUser");
 
 
 
@@ -27,7 +26,7 @@ viewAllRequestsButton.addEventListener('click', function (event) {
 
     let userid = getCookie("id");
     let auth = getCookie("Authorization");
-    //let getUser = `${apiView}${userid}`;
+    
 
     //Fetch the url request.
     fetch(apiViewAllRequests, {
@@ -43,6 +42,5 @@ viewAllRequestsButton.addEventListener('click', function (event) {
             console.log(data)
             viewAllRequestsDiv.innerHTML += `<p>${data}</p>`
             viewAllRequestsClass.append(viewAllRequestsDiv);
-            //console.log(newDiv);
-        });
+          });
 })

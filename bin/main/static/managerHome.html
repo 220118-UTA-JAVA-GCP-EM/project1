@@ -20,52 +20,21 @@
             <a href="logout.html">
                 <button id="logout" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">Log Out</button>
             </a>
-            <!--<ul class="list">
-                <li class="item">
-                    <a class="link">
-                        Resolve Pending Requests
-                    </a>
-                </li>
-                <li class="item">
-                    <a class="link">
-                        View All Requests
-                        <input type="submit" value="all-requests" id="all-requests" />
-                    </a>
-                </li>
-                <li class="item">
-                    <a class="link">
-                        View Employee's Request
-                        <input type = 'text' id = "user-id" maxlength="50" required/>
-                        <input type="submit" value="employee-requests" id="employee-requests" />
-                    </a>
-                </li>
-                <li class="item">
-                    <a class="link">
-                        View All Employees
-                        <input type="submit" value="view-employees" id="view-employees" />
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="logout.html">
-                        <input type = 'submit' id = "logout" value = "logout"/>
-                    </a>
-                </li>
-            </ul>-->
-        </div>
+            </div>
         <div id="resolveInput" style="display: none">
             <nav class = "nav nav-masthead justify-content-center p-2">
-                <input type = 'text' id = "request-id" maxlength="50" placeholder="Enter request id here"/>
+                <input type = 'text' id = "request-id" maxlength="50" placeholder="Enter Request ID Here"/>
                 <select name="status" id="status" required>
                 <option value="null">Select Status</option>
-                <option value="2">1 - Approve</option>
-                <option value="3">2 - Deny</option>
+                <option value="2">2 - Approve</option>
+                <option value="3">3 - Deny</option>
                 </select>
                 <button id="resolve-requests" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">Resolve Request</button>
             </nav>
         </div>
         <div id="employeeRequests" style="display: none;">
             <nav class = "nav nav-masthead justify-content-center p-2">
-                <input type = 'text' id = "user-id" maxlength="50" placeholder="Enter employee's id here" required/>
+                <input type = 'text' id = "user-id" maxlength="50" placeholder="Enter Employee's ID here" required/>
                 <button id="employee-requests" class="btn btn-md btn-secondary fw-bold border-white bg-blue" type="submit">View</button>
             </nav>
         </div>
@@ -85,7 +54,6 @@
             
         </div>
         <script src="viewAllU.js"></script>
-        <!--<script src="viewAllR.js"></script>-->
         <script src="viewRM.js"></script>
         <script src="viewRMP.js"></script>
         <script src="viewRMR.js"></script>

@@ -45,6 +45,18 @@ pendingRequestsButton.addEventListener('click', function (event) {
             pendingRequestsDiv.innerHTML += `<p style="font-size: 30px">Pending Requests</p>`
             pendingRequestsClass.append(pendingRequestsDiv);
             for(let i = 0; i < data.length; i++){
+              let dateSubmitted = new Date(data[i].submitted);
+              //not the best way to fix this but...
+              let type = data[i].typeId;
+              if(type == 1){
+                type = "LODGING";
+              } else if(type == 2) {
+                type = "TRAVEL";
+              } else if(type == 3) {
+                type = "FOOD";
+              } else {
+                type = "OTHER";
+              }
             pendingRequestsDiv.innerHTML += `<style>
             table, td, th {
               border: 1px solid white;
@@ -53,6 +65,7 @@ pendingRequestsButton.addEventListener('click', function (event) {
             table {
               border-collapse: collapse;
               width: 100%;
+              table-layout: fixed;
             }
             
             td {
@@ -65,21 +78,17 @@ pendingRequestsButton.addEventListener('click', function (event) {
               <th>ID #</th>
               <th>Amount $</th>
               <th>Submitted</th>
-              <th>Resolved</th>
               <th>Description</th>
-              <th>Author</th>
-              <th>Resolver</th>
+              <th>Author ID</th>
               <th>Type</th>
             </tr>
             <tr>
               <td>${data[i].id}</td>
-              <td>${data[i].amount}</td>
-              <td>${data[i].submitted}</td>
-              <td>${data[i].resolved}</td>
+              <td>$${data[i].amount}</td>
+              <td>${dateSubmitted.toDateString()}</td>
               <td>${data[i].description}</td>
               <td>${data[i].author}</td>
-              <td>${data[i].resolver}</td>
-              <td>${data[i].typeId}</td>
+              <td>${type}</td>
             </tr>
             <br>
           </table>`

@@ -46,8 +46,8 @@ function getInfo(){
       username = data.username;
       document.getElementById('username').setAttribute('value', username);
       //maybe have them fillin the whole password again?
-      password = data.password;
-      document.getElementById('password').setAttribute('value', password);
+      //password = data.password;
+      //document.getElementById('password').setAttribute('value', password);
 
     });
 }
