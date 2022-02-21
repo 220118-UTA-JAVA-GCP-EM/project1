@@ -52,6 +52,7 @@ viewButton.addEventListener('click', function (event) {
             table {
               border-collapse: collapse;
               width: 100%;
+              table-layout: fixed;
             }
             
             td {

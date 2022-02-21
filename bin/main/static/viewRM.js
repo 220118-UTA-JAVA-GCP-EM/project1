@@ -49,6 +49,27 @@ viewRequestsButton3.addEventListener('click', function (event) {
             newDiv3.innerHTML += `<p style="font-size: 30px">Employee #${data[0].author}'s Requests</p>`
             newUserClass3.append(newDiv3);
             for(let i = 0; i < data.length; i++){
+              let dateSubmitted = new Date(data[i].submitted);
+              let dateResolved = new Date(data[i].resolved);
+              //not the best way to fix this but...
+              let status = data[i].statusId;
+              if(status == 2){
+                status = "APPROVED";
+              } else if (status == 3) {
+                status = "DENIED";
+              } else {
+                status = "PENDING";
+              }
+              let type = data[i].typeId;
+              if(type == 1){
+                type = "LODGING";
+              } else if(type == 2) {
+                type = "TRAVEL";
+              } else if(type == 3) {
+                type = "FOOD";
+              } else {
+                type = "OTHER";
+              }
             newDiv3.innerHTML += `<style>
             table, td, th {
               border: 1px solid white;
@@ -57,6 +78,7 @@ viewRequestsButton3.addEventListener('click', function (event) {
             table {
               border-collapse: collapse;
               width: 100%;
+              table-layout: fixed;
             }
             
             td {
@@ -71,21 +93,21 @@ viewRequestsButton3.addEventListener('click', function (event) {
               <th>Submitted</th>
               <th>Resolved</th>
               <th>Description</th>
-              <th>Author</th>
-              <th>Resolver</th>
+              <th>Author ID</th>
+              <th>Resolver ID</th>
               <th>Status</th>
               <th>Type</th>
             </tr>
             <tr>
               <td>${data[i].id}</td>
-              <td>${data[i].amount}</td>
-              <td>${data[i].submitted}</td>
-              <td>${data[i].resolved}</td>
+              <td>$${data[i].amount}</td>
+              <td>${dateSubmitted.toDateString()}</td>
+              <td>${dateResolved.toDateString()}</td>
               <td>${data[i].description}</td>
               <td>${data[i].author}</td>
               <td>${data[i].resolver}</td>
-              <td>${data[i].statusId}</td>
-              <td>${data[i].typeId}</td>
+              <td>${status}</td>
+              <td>${type}</td>
             </tr>
             <br>
           </table>`

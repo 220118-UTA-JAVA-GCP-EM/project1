@@ -73,4 +73,40 @@ public class T2 {
 
         assertNotNull(rd.getAllRequests());
     }
+    @Test
+    public void testGetAllPendingRequests(){
+        r = new Reimbursement();
+        List<Reimbursement> listR = new ArrayList<>();
+        listR.add(r);
+        when(rd.getAllPendingRequests()).thenReturn(listR);
+
+        assertNotNull(rd.getAllPendingRequests());
+    }
+    @Test
+    public void testGetAllResolvedRequests(){
+        r = new Reimbursement();
+        List<Reimbursement> listR = new ArrayList<>();
+        listR.add(r);
+        when(rd.getAllResolvedRequests()).thenReturn(listR);
+
+        assertNotNull(rd.getAllResolvedRequests());
+    }
+    @Test
+    public void testGetPendingRequestsById(){
+        r = new Reimbursement();
+        List<Reimbursement> listR = new ArrayList<>();
+        listR.add(r);
+        when(rd.getPendingRequestsById(21)).thenReturn(listR);
+
+        assertNotNull(rd.getPendingRequestsById(21));
+    }
+    @Test
+    public void testGetResolvedRequestsById(){
+        r = new Reimbursement();
+        List<Reimbursement> listR = new ArrayList<>();
+        listR.add(r);
+        when(rd.getResolvedRequestsById(21)).thenReturn(listR);
+
+        assertNotNull(rd.getResolvedRequestsById(21));
+    }
 }
